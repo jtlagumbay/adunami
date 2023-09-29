@@ -5,9 +5,13 @@ In partial fulfillment of CMSC 124 A.Y. 2023-2024.
 Group members:
 
 > Princess Ethel Atillo
+
 > Jade Zahyen Cataques
+
 > Jhoanna Rica Lagumbay
+
 > Zoe Molina
+
 > Donna Mae Mozo
 
 ## Important Links
@@ -21,8 +25,13 @@ Group members:
 ## Directory Guide
 
 **src** - contains all code for the IDE
+
 **src \ assets \ images** - all images needed
+
 **src \ main \ java \ jjprindozo** - contains all java classes for ide
+
 **src \ main \ java \ jjprindozo \ buttons** - contains all buttons needed in IDE
+
 **src \ main \ java \ jjprindozo \ common** - contains all classes that are reusable all throughout the classes
+
 **src \ main \ java \ jjprindozo \ main** - contains main components of the IDE
