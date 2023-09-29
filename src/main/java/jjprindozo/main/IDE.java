@@ -6,12 +6,17 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.undo.UndoManager;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
 public class IDE {
+
     // GUI Window
     private static void createWindow() {
+
+        UndoManager undoManager = new UndoManager();
+
         // setup the window
         JFrame frame = new JFrame("Adunami IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +33,7 @@ public class IDE {
         frame.add(code, BorderLayout.EAST);
 
         // navbar
-        NavbarPanel nav = new NavbarPanel(code);
+        NavbarPanel nav = new NavbarPanel(code, undoManager);
         frame.add(nav, BorderLayout.WEST);
 
         // scroller for text area
