@@ -13,21 +13,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import jjprindozo.common.GlobalVar;
+import jjprindozo.main.FileHandler;
 
 public class SaveButton extends NavbarButtonTheme {
   private static File selectedFile;
+  private static FileHandler fileHandler = FileHandler.getInstance();
   private static JFileChooser fileChooser = new JFileChooser();
 
-  public SaveButton(JTextArea textArea,  OpenButton open) {
+  public SaveButton(JTextArea textArea) {
     super(GlobalVar.IMAGE_PATH+"save_file_icon.png", "Save");
     addActionListener(e -> {
-      selectedFile = open.getSelectedFile();
+      selectedFile = fileHandler.getSelectedFile(); 
       saveFile(textArea);
     });
   }
   private void saveFile(JTextArea textArea) {
-		// if there is a file being edited
-		if(selectedFile != null) {
+    // if there is a file being edited
+    selectedFile = fileHandler.getSelectedFile();
+    System.out.println("fileHandler.getSelectedFile().getName()");
+
+    if (selectedFile != null) {
+      System.out.println("selectedFile");  
 			JFrame frame = new JFrame();
 
 			try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(selectedFile.getAbsolutePath()))){
@@ -43,33 +49,35 @@ public class SaveButton extends NavbarButtonTheme {
 			}
 		
 		// if no file, make new one
-		} else {
-			int result = fileChooser.showSaveDialog(textArea);
+      } else {
+        int result = fileChooser.showSaveDialog(textArea);
 
-			if(result == JFileChooser.APPROVE_OPTION) {
-				selectedFile = fileChooser.getSelectedFile();
-				String fileName = selectedFile.getAbsolutePath();
-				JFrame frame = new JFrame();
+        if (result == JFileChooser.APPROVE_OPTION) {
+          selectedFile = fileChooser.getSelectedFile();
+          fileHandler.setSelectedFile(selectedFile);
+          String fileName = selectedFile.getAbsolutePath();
+          JFrame frame = new JFrame();
 
-				// add .txt extension
-				if (!fileName.toLowerCase().endsWith(".txt")) {
-					fileName += ".txt";
-				} 
+          // add .txt extension
+          if (!fileName.toLowerCase().endsWith(".txt")) {
+            fileName += ".txt";
+          }
 
-				try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+          try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
 
-					// Write the text from the JTextArea to the file
-					writer.write(textArea.getText());
-					writer.flush();
-					JOptionPane.showMessageDialog(frame, "File saved successfully.");
+            // Write the text from the JTextArea to the file
+            writer.write(textArea.getText());
+            writer.flush();
+            JOptionPane.showMessageDialog(frame, "File saved successfully.");
 
-				} catch (IOException e) {
-					JOptionPane.showMessageDialog(frame, "An error occurred while saving the file.");
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+          } catch (IOException e) {
+            JOptionPane.showMessageDialog(frame, "An error occurred while saving the file.");
+            e.printStackTrace();
+          }
+        }
+      }
+	
+    }
 
 }
 

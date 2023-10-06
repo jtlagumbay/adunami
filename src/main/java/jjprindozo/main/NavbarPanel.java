@@ -15,7 +15,7 @@ import jjprindozo.common.Colors;
 
 
 public class NavbarPanel extends JPanel {    
-
+  private static FileHandler fileHandler = FileHandler.getInstance();
     public NavbarPanel(JTextArea textArea) {
       // JPanel layout
       setLayout(new GridLayout(15, 1, 5, 5));
@@ -30,7 +30,7 @@ public class NavbarPanel extends JPanel {
       add(open);
 
       /** <-------  SAVE FUNCTION  -------> **/
-      SaveButton save = new SaveButton(textArea, open);
+      SaveButton save = new SaveButton(textArea);
       add(save);
       
       /** <-------  UNDO FUNCTION  -------> **/
