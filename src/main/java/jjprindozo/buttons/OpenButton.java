@@ -8,24 +8,32 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
+import jjprindozo.common.FileSetter;
 import jjprindozo.common.GlobalVar;
+
+
 
 public class OpenButton extends NavbarButtonTheme {
   private static File selectedFile;
   private static JFileChooser fileChooser = new JFileChooser();
 
   public OpenButton(JTextArea textArea) {
-    super(GlobalVar.IMAGE_PATH+"open_file_icon.png", "Open");
+    super(GlobalVar.IMAGE_PATH + "open_file_icon.png", "Open");
     addActionListener(e -> {
-			openFile(textArea);
-		});
+      openFile(textArea);
+    });
+  }
+  
+  public File getSelectedFile() {
+    if(selectedFile!=null && selectedFile.exists())
+      return selectedFile;
+    else return null;
   }
   
   private void openFile(JTextArea textArea) {
 		int returnVal = fileChooser.showOpenDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			selectedFile = fileChooser.getSelectedFile();
-
+      selectedFile = fileChooser.getSelectedFile();
 			try {
 				File file = new File(selectedFile.getAbsolutePath());
 

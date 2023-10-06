@@ -1,6 +1,7 @@
 package jjprindozo.main;
 
 import java.awt.GridLayout;
+import java.io.File;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -12,8 +13,9 @@ import jjprindozo.buttons.SaveButton;
 import jjprindozo.buttons.UndoButton;
 import jjprindozo.common.Colors;
 
-public class NavbarPanel extends JPanel {
-	
+
+public class NavbarPanel extends JPanel {    
+
     public NavbarPanel(JTextArea textArea) {
       // JPanel layout
       setLayout(new GridLayout(15, 1, 5, 5));
@@ -28,7 +30,7 @@ public class NavbarPanel extends JPanel {
       add(open);
 
       /** <-------  SAVE FUNCTION  -------> **/
-      SaveButton save = new SaveButton(textArea);
+      SaveButton save = new SaveButton(textArea, open);
       add(save);
       
       /** <-------  UNDO FUNCTION  -------> **/
@@ -40,6 +42,9 @@ public class NavbarPanel extends JPanel {
       add(redo);
 
     }
+
+
+
 
     }
 

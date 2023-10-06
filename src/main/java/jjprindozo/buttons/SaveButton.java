@@ -18,9 +18,10 @@ public class SaveButton extends NavbarButtonTheme {
   private static File selectedFile;
   private static JFileChooser fileChooser = new JFileChooser();
 
-  public SaveButton(JTextArea textArea) {
+  public SaveButton(JTextArea textArea,  OpenButton open) {
     super(GlobalVar.IMAGE_PATH+"save_file_icon.png", "Save");
     addActionListener(e -> {
+      selectedFile = open.getSelectedFile();
       saveFile(textArea);
     });
   }
