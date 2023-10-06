@@ -8,7 +8,6 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
-import jjprindozo.common.FileSetter;
 import jjprindozo.common.GlobalVar;
 
 

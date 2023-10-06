@@ -13,7 +13,7 @@ public class IDE {
     // GUI Window
     private static void createWindow() {
         // setup the window
-        JFrame frame = new JFrame("Adunami IDE");
+        JFrame frame = new JFrame("adunami IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // set to fullscreen
