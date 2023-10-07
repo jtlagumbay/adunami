@@ -1,11 +1,7 @@
 package jjprindozo.main;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
+import java.awt.*;
+import javax.swing.*;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
@@ -22,22 +18,30 @@ public class IDE {
         // change icon
         ImageIcon img = new ImageIcon("src/assets/images/logo.png");
         frame.setIconImage(img.getImage());
-        
+
+        // panel that houses textArea and topbar
+        JPanel pane = new JPanel(new BorderLayout());
+
+        // topbar
+        TopbarPanel bar = new TopbarPanel();
+        pane.add(bar, BorderLayout.PAGE_START);
+
         // text area
         TextEditorTextArea code = new TextEditorTextArea();
-        frame.add(code, BorderLayout.EAST);
+
+        // scroller for text area
+        JScrollPane scroll = new JScrollPane(code);        
+        pane.add(scroll);
+
+        frame.add(pane);
 
         // navbar
         NavbarPanel nav = new NavbarPanel(code);
         frame.add(nav, BorderLayout.WEST);
 
-        // scroller for text area
-        JScrollPane scroll = new JScrollPane(code);
-        frame.add(scroll);
-
         // display the window
         frame.setLocationRelativeTo(null);
-		    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.pack();
         frame.setVisible(true);
     }
