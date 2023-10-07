@@ -1,7 +1,6 @@
 package jjprindozo.main;
 
 import java.awt.GridLayout;
-import java.io.File;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
