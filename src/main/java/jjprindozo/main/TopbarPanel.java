@@ -7,9 +7,11 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import jjprindozo.buttons.CompileButton;
-import jjprindozo.buttons.RunButton;
+import jjprindozo.buttons.navbar.RunButton;
+import jjprindozo.buttons.topbar.CompileButton;
 import jjprindozo.common.Colors;
+import jjprindozo.files.FileChangeListener;
+import jjprindozo.files.FileHandler;
 
 public class TopbarPanel extends JPanel implements FileChangeListener {
     private static FileHandler fileHandler = FileHandler.getInstance();

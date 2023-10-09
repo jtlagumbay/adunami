@@ -5,11 +5,11 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import jjprindozo.buttons.NewFileButton;
-import jjprindozo.buttons.OpenButton;
-import jjprindozo.buttons.RedoButton;
-import jjprindozo.buttons.SaveButton;
-import jjprindozo.buttons.UndoButton;
+import jjprindozo.buttons.navbar.NewFileButton;
+import jjprindozo.buttons.navbar.OpenButton;
+import jjprindozo.buttons.navbar.RedoButton;
+import jjprindozo.buttons.navbar.SaveButton;
+import jjprindozo.buttons.topbar.UndoButton;
 import jjprindozo.common.Colors;
 
 

@@ -5,6 +5,8 @@ import javax.swing.*;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
+import jjprindozo.files.FileHandler;
+
 public class IDE {
     // GUI Window
     private static void createWindow() {
