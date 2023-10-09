@@ -13,12 +13,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import jjprindozo.common.GlobalVar;
+import jjprindozo.main.CustomFileChooser;
 import jjprindozo.main.FileHandler;
 
 public class SaveButton extends NavbarButtonTheme {
   private static File selectedFile;
   private static FileHandler fileHandler = FileHandler.getInstance();
-  private static JFileChooser fileChooser = new JFileChooser();
+  private static JFileChooser fileChooser = new CustomFileChooser();
 
   public SaveButton(JTextArea textArea) {
     super(GlobalVar.IMAGE_PATH+"save_file_icon.png", "Save");
@@ -30,10 +31,8 @@ public class SaveButton extends NavbarButtonTheme {
   private void saveFile(JTextArea textArea) {
     // if there is a file being edited
     selectedFile = fileHandler.getSelectedFile();
-    System.out.println("fileHandler.getSelectedFile().getName()");
 
     if (selectedFile != null) {
-      System.out.println("selectedFile");  
 			JFrame frame = new JFrame();
 
 			try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(selectedFile.getAbsolutePath()))){
@@ -54,6 +53,12 @@ public class SaveButton extends NavbarButtonTheme {
 
         if (result == JFileChooser.APPROVE_OPTION) {
           selectedFile = fileChooser.getSelectedFile();
+          if (!selectedFile.getName().endsWith(GlobalVar.FILE_EXTENSION)) {
+            String newFilePath = selectedFile.getAbsolutePath() + "." + GlobalVar.FILE_EXTENSION;
+            File renamedFile = new File(newFilePath);
+            selectedFile = renamedFile;
+          }
+
           fileHandler.setSelectedFile(selectedFile);
           String fileName = selectedFile.getAbsolutePath();
           JFrame frame = new JFrame();

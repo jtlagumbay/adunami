@@ -25,6 +25,6 @@ public class FileHandler {
   }
   
   public void setSelectedFile(File newSelectedFile) {
-        selectedFile = newSelectedFile;
+    selectedFile = newSelectedFile;
     }
 }
