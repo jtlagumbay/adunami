@@ -8,6 +8,13 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 public class IDE {
     // GUI Window
     private static void createWindow() {
+        // Initialize FileHandler and TopbarPanel
+        FileHandler fileHandler = FileHandler.getInstance();
+        TopbarPanel topbarPanel = new TopbarPanel();
+
+        // Register topbarPanel as a listener for file changes
+        fileHandler.setFileChangeListener(topbarPanel);
+
         // setup the window
         JFrame frame = new JFrame("adunami IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

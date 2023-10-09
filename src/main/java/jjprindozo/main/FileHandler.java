@@ -5,6 +5,11 @@ import java.io.File;
 public class FileHandler {
   private static FileHandler instance;
   private File selectedFile;
+  private FileChangeListener fileChangeListener;
+
+  public void setFileChangeListener(FileChangeListener listener) {
+    this.fileChangeListener = listener;
+  }
 
   private FileHandler() {
     // Private constructor to prevent instantiation from outside the class
@@ -26,5 +31,10 @@ public class FileHandler {
   
   public void setSelectedFile(File newSelectedFile) {
     selectedFile = newSelectedFile;
+
+    // listen to change
+    if (fileChangeListener != null) {
+      fileChangeListener.onFileChange(selectedFile != null ? selectedFile.getName() : "Untitled Text");
     }
+  }
 }
