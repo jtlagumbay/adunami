@@ -9,15 +9,17 @@ import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
 public class RedoButton extends NavbarButtonTheme {
-     private static KeyStroke ctrlYKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK);
+  private static KeyStroke ctrlShiftZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+
   public RedoButton() {
     super(
         GlobalVar.IMAGE_PATH + "redo_icon.png",
         "Redo",
-        ctrlYKeyStroke,
+        ctrlShiftZKeyStroke,
         new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
+            System.out.println("redo");
           }
         },
         "redoAction"

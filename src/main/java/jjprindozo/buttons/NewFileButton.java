@@ -10,7 +10,7 @@ import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
 public class NewFileButton extends NavbarButtonTheme {
-    private static KeyStroke ctrlNKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK);
+    private static KeyStroke ctrlNKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
 
   public NewFileButton() {
     super(
@@ -20,6 +20,7 @@ public class NewFileButton extends NavbarButtonTheme {
         new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
+            System.out.println("new file");
           }
         },
         "newFileAction"

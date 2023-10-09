@@ -19,7 +19,7 @@ public class UndoButton extends NavbarButtonTheme {
         new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            
+            System.out.println("undo");
           }
         },
         "undoAction"

@@ -4,18 +4,33 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JToolTip;
+import javax.swing.KeyStroke;
 
 import jjprindozo.common.Colors;
 
 public class TopbarButtonTheme extends JButton {
 
-  public TopbarButtonTheme(String iconPath, String tootlTipText) {
+  public TopbarButtonTheme(
+    String iconPath, 
+    String tootlTipText, 
+    KeyStroke buttonKeyStroke,
+    Action buttonAction,
+    String actionObject) {
+
     super.setContentAreaFilled(false);
 
+    // Actions
+    addActionListener(buttonAction);
+    getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(buttonKeyStroke, actionObject);
+    getActionMap().put(actionObject, buttonAction);
+
+
+    // UI
     ImageIcon openIcon = new ImageIcon(iconPath);
     setBackground(Colors.GREEN);
     setBorder(null);

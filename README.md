@@ -32,6 +32,8 @@ Group members:
 
 **src \ assets \ images** - all images needed
 
+**src \ assets \ fonts** - all custom fonts needed
+
 **src \ main \ java \ jjprindozo** - contains all java classes for ide
 
 **src \ main \ java \ jjprindozo \ buttons** - contains all buttons needed in IDE
@@ -104,3 +106,19 @@ If you encounter error in the KeyEvent, InputEvent, and ActionEvent, your IDE mu
     import  java.awt.event.KeyEvent;
 
     import  java.awt.event.ActionEvent;
+
+## KEY BINDINGS
+
+**New File** - CTRL + N
+
+**Open** - CTRL + O
+
+**Save** - CTRL + S
+
+**Undo** - CTRL + Z
+
+**Redo** - CTRL + SHIFT + Z
+
+**Compile** - CTRL + B
+
+**Run** - CTRL + R
