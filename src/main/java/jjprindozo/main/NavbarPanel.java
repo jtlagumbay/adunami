@@ -23,7 +23,7 @@ public class NavbarPanel extends JPanel {
       /** <-------  NEW FUNCTION  -------> **/
       NewFileButton newFile = new NewFileButton();
       add(newFile);
-
+      
       /** <-------  OPEN FUNCTION  -------> **/
       OpenButton open = new OpenButton(textArea);
       add(open);
