@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.undo.UndoManager;
 
 import jjprindozo.buttons.navbar.NewFileButton;
 import jjprindozo.buttons.navbar.OpenButton;
@@ -15,7 +16,7 @@ import jjprindozo.common.Colors;
 
 public class NavbarPanel extends JPanel {    
   // private static FileHandler fileHandler = FileHandler.getInstance();
-    public NavbarPanel(JTextArea textArea) {
+    public NavbarPanel(JTextArea textArea, UndoManager undoManager) {
       // JPanel layout
       setLayout(new GridLayout(15, 1, 5, 5));
       setBackground(Colors.DARKGRAY);
@@ -33,11 +34,11 @@ public class NavbarPanel extends JPanel {
       add(save);
       
       /** <-------  UNDO FUNCTION  -------> **/
-      UndoButton undo = new UndoButton();
+      UndoButton undo = new UndoButton(undoManager);
       add(undo);
       
       /** <-------  REDO FUNCTION  -------> **/
-      RedoButton redo = new RedoButton();
+      RedoButton redo = new RedoButton(undoManager);
       add(redo);
 
     }

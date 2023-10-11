@@ -8,11 +8,12 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
+import javax.swing.undo.UndoManager;
 
 public class UndoButton extends NavbarButtonTheme {
     private static KeyStroke ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK);
 
-  public UndoButton() {
+  public UndoButton(UndoManager undoManager) {
     super(
         GlobalVar.IMAGE_PATH + "undo_icon.png",
         "Undo",
@@ -25,5 +26,12 @@ public class UndoButton extends NavbarButtonTheme {
         },
         "undoAction"
       );
+    addActionListener(e -> {
+        try {
+           undoManager.undo();
+         } catch (Exception ex){
+
+         }
+     });
   }
 }

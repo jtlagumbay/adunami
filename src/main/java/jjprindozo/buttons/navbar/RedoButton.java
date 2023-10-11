@@ -7,11 +7,12 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
+import javax.swing.undo.UndoManager;
 
 public class RedoButton extends NavbarButtonTheme {
   private static KeyStroke ctrlShiftZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
 
-  public RedoButton() {
+  public RedoButton(UndoManager undoManager) {
     super(
         GlobalVar.IMAGE_PATH + "redo_icon.png",
         "Redo",
@@ -24,5 +25,12 @@ public class RedoButton extends NavbarButtonTheme {
         },
         "redoAction"
       );
+    addActionListener(e -> {
+        try {
+           undoManager.redo();
+         } catch (Exception ex){
+
+         }
+     });
   }
 }

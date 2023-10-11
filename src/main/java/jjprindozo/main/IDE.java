@@ -2,6 +2,7 @@ package jjprindozo.main;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
@@ -10,6 +11,9 @@ import jjprindozo.files.FileHandler;
 public class IDE {
     // GUI Window
     private static void createWindow() {
+    	
+    	UndoManager undoManager = new UndoManager();
+    	
         // Initialize FileHandler and TopbarPanel
         FileHandler fileHandler = FileHandler.getInstance();
         TopbarPanel topbarPanel = new TopbarPanel();
@@ -45,7 +49,7 @@ public class IDE {
         frame.add(pane);
 
         // navbar
-        NavbarPanel nav = new NavbarPanel(code);
+        NavbarPanel nav = new NavbarPanel(code, undoManager);
         frame.add(nav, BorderLayout.WEST);
 
         // display the window
