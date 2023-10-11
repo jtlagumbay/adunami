@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import jjprindozo.buttons.navbar.RunButton;
 import jjprindozo.buttons.topbar.CompileButton;
@@ -26,7 +27,8 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         // custom font: jost
         Font customFont = new Font("sans-serif", Font.BOLD, 14);
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/fonts/jost.ttf")).deriveFont(14f);
+          InputStream inputStream = getClass().getResourceAsStream("/fonts/jost.ttf");
+            customFont = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(14f);
         } catch (IOException e) {
             e.printStackTrace();
         } catch(FontFormatException e) {

@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.undo.UndoManager;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
+// import com.formdev.flatlaf.FlatDarculaLaf;
 
 import jjprindozo.files.FileHandler;
 
@@ -60,7 +60,7 @@ public class IDE {
     }
 
     public static void main(String[] args) {
-      FlatDarculaLaf.setup();
+      // FlatDarculaLaf.setup();
 
 		// call window
         createWindow();

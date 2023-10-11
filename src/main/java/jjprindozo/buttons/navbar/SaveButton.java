@@ -25,7 +25,16 @@ public class SaveButton extends NavbarButtonTheme {
   private static File selectedFile;
   private static FileHandler fileHandler = FileHandler.getInstance();
   private static JFileChooser fileChooser = new CustomFileChooser();
-  private static KeyStroke ctrlSKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK);
+  private static KeyStroke ctrlSKeyStroke;
+  static {
+    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+          // On macOS, use Command + S
+          ctrlSKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.META_DOWN_MASK);
+      } else {
+          // On other platforms, use Ctrl + S
+          ctrlSKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK);
+      }
+  }
 
   public SaveButton(JTextArea textArea) {
     super(

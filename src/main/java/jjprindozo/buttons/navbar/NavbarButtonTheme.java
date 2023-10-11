@@ -3,6 +3,7 @@ package jjprindozo.buttons.navbar;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -27,15 +28,18 @@ public class NavbarButtonTheme extends JButton {
     addActionListener(buttonAction);
     getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(buttonKeyStroke, actionObject);
     getActionMap().put(actionObject, buttonAction);
-    
+
     // UI
+    URL logoOneUrl = getClass().getResource(iconPath);
+    if (logoOneUrl != null) {
+      ImageIcon openIcon = new ImageIcon(logoOneUrl);
+      setIcon(new ImageIcon(openIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+    }
     
-    ImageIcon openIcon = new ImageIcon(iconPath);
     setBackground(Colors.DARKGRAY);
     setBorder(null);
     setFocusPainted(false);
     setPreferredSize(new Dimension(50, 50));
-    setIcon(new ImageIcon(openIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
     setToolTipText(tootlTipText);
   }
   
