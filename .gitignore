@@ -1,1 +1,8 @@
-/target/
+target/
+*.class
+*.prefs
+.vscode/settings.json
+*.prefs
+.classpath
+*.prefs
+.settings/org.eclipse.jdt.core.prefs
