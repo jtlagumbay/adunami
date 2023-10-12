@@ -28,9 +28,11 @@ public class UndoButton extends NavbarButtonTheme {
       );
     addActionListener(e -> {
         try {
-           undoManager.undo();
+          if(undoManager.canUndo()) {
+            undoManager.undo();     //Perform undo action
+          }
          } catch (Exception ex){
-
+          ex.printStackTrace(); // Handle any exceptions
          }
      });
   }

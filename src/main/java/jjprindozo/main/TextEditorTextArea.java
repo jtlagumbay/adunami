@@ -6,16 +6,22 @@ import java.awt.Graphics;
 import java.awt.Insets;
 
 import javax.swing.JTextArea;
+import javax.swing.undo.UndoManager;
 
 import jjprindozo.common.Colors;
 
 public class TextEditorTextArea extends JTextArea {
-    public TextEditorTextArea() {
+    public TextEditorTextArea(UndoManager undoManager) {
         setEditable(true);
         setBackground(Colors.LIGHTGRAY);
         setForeground(Colors.WHITE);
         setFont(new Font("monospaced", Font.PLAIN, 16));
         setMargin(new Insets(0, 40, 0, 0));
+
+        // Register the UndoManager with the text area
+        getDocument().addUndoableEditListener(undoManager);
+
+        
     }
 
     @Override

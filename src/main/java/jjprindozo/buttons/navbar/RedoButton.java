@@ -27,9 +27,11 @@ public class RedoButton extends NavbarButtonTheme {
       );
     addActionListener(e -> {
         try {
-           undoManager.redo();
+          if (undoManager.canRedo()) {
+            undoManager.redo(); // Perform redo action
+          }
          } catch (Exception ex){
-
+          ex.printStackTrace(); // Handle any exceptions
          }
      });
   }

@@ -12,6 +12,7 @@ public class IDE {
     // GUI Window
     private static void createWindow() {
     	
+        //Create UndoManager for text area
     	UndoManager undoManager = new UndoManager();
     	
         // Initialize FileHandler and TopbarPanel
@@ -40,7 +41,7 @@ public class IDE {
         pane.add(bar, BorderLayout.PAGE_START);
 
         // text area
-        TextEditorTextArea code = new TextEditorTextArea();
+        TextEditorTextArea code = new TextEditorTextArea(undoManager);
 
         // scroller for text area
         JScrollPane scroll = new JScrollPane(code);        
