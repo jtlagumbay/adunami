@@ -20,19 +20,20 @@ public class RedoButton extends NavbarButtonTheme {
         new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            System.out.println("redo");
+            redoText(undoManager);
           }
         },
         "redoAction"
       );
-    addActionListener(e -> {
-        try {
-          if (undoManager.canRedo()) {
-            undoManager.redo(); // Perform redo action
-          }
-         } catch (Exception ex){
-          ex.printStackTrace(); // Handle any exceptions
-         }
-     });
+  }
+
+  private static void redoText(UndoManager undoManager) {
+    try {
+      if (undoManager.canRedo()) {
+        undoManager.redo(); // Perform redo action
+      }
+    } catch (Exception ex){
+      ex.printStackTrace(); // Handle any exceptions
+    }
   }
 }

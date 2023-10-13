@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jjprindozo.buttons.navbar.RunButton;
 import jjprindozo.buttons.topbar.CompileButton;
+import jjprindozo.buttons.topbar.RunButton;
 import jjprindozo.common.Colors;
 import jjprindozo.files.FileChangeListener;
 import jjprindozo.files.FileHandler;

@@ -30,7 +30,7 @@ public class IDE {
         frame.setPreferredSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
 
         // change icon
-        ImageIcon img = new ImageIcon("src/assets/images/logo.png");
+        ImageIcon img = new ImageIcon("src/main/resources/images/logo.png");
         frame.setIconImage(img.getImage());
 
         // panel that houses textArea and topbar

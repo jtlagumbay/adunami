@@ -10,7 +10,7 @@ import jjprindozo.buttons.navbar.NewFileButton;
 import jjprindozo.buttons.navbar.OpenButton;
 import jjprindozo.buttons.navbar.RedoButton;
 import jjprindozo.buttons.navbar.SaveButton;
-import jjprindozo.buttons.topbar.UndoButton;
+import jjprindozo.buttons.navbar.UndoButton;
 import jjprindozo.common.Colors;
 
 

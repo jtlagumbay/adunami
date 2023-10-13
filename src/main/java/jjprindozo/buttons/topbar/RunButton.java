@@ -1,11 +1,10 @@
-package jjprindozo.buttons.navbar;
+package jjprindozo.buttons.topbar;
 
 import java.awt.event.*;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import jjprindozo.buttons.topbar.TopbarButtonTheme;
 import jjprindozo.common.GlobalVar;
 
 public class RunButton extends TopbarButtonTheme {
