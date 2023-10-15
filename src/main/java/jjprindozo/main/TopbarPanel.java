@@ -44,6 +44,7 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         file.setForeground(Colors.WHITE);
 
         // listens to unsaved changes DO NOT DELETE!!
+        @SuppressWarnings("all")
         MonitorFile monitorFile = new MonitorFile(null, textArea, file);
         
         add(file, BorderLayout.WEST);
