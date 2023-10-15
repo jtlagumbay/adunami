@@ -9,6 +9,7 @@ import javax.swing.undo.UndoManager;
 import jjprindozo.buttons.navbar.NewFileButton;
 import jjprindozo.buttons.navbar.OpenButton;
 import jjprindozo.buttons.navbar.RedoButton;
+import jjprindozo.buttons.navbar.SaveAsButton;
 import jjprindozo.buttons.navbar.SaveButton;
 import jjprindozo.buttons.navbar.UndoButton;
 import jjprindozo.common.Colors;
@@ -32,6 +33,10 @@ public class NavbarPanel extends JPanel {
       /** <-------  SAVE FUNCTION  -------> **/
       SaveButton save = new SaveButton(textArea);
       add(save);
+ 
+      /** <-------  SAVE AS NEW FILE FUNCTION  -------> **/
+      SaveAsButton saveAs = new SaveAsButton(textArea);
+      add(saveAs);
       
       /** <-------  UNDO FUNCTION  -------> **/
       UndoButton undo = new UndoButton(undoManager);
