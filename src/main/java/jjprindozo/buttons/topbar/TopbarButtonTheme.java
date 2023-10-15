@@ -1,5 +1,6 @@
 package jjprindozo.buttons.topbar;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -43,6 +44,7 @@ public class TopbarButtonTheme extends JButton {
     setFocusPainted(false);
     setPreferredSize(new Dimension(30, 30));
     setToolTipText(tootlTipText);
+    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
   }
   
     @Override

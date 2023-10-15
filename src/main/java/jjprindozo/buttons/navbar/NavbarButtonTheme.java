@@ -1,5 +1,6 @@
 package jjprindozo.buttons.navbar;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -41,6 +42,7 @@ public class NavbarButtonTheme extends JButton {
     setFocusPainted(false);
     setPreferredSize(new Dimension(50, 50));
     setToolTipText(tootlTipText);
+    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
   }
   
     @Override
