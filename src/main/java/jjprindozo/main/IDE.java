@@ -78,10 +78,14 @@ public class IDE {
     }
 
     private static void closeWindow(JFrame frame, JTextArea textArea) {
-        switch(MonitorFile.saveChanges(textArea, 1)) {
+        switch(MonitorFile.saveChanges(textArea)) {
             case 0:
                 SaveButton.saveFile(textArea);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                break;
+            
+            case 2:
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 break;
             
             default:
