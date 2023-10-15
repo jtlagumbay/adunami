@@ -1,12 +1,16 @@
 package jjprindozo.main;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.undo.UndoManager;
+
+import jjprindozo.buttons.navbar.SaveButton;
 
 // import com.formdev.flatlaf.FlatDarculaLaf;
 
 import jjprindozo.files.FileHandler;
+import jjprindozo.files.MonitorFile;
 
 public class IDE {
     // GUI Window
@@ -24,7 +28,6 @@ public class IDE {
 
         // setup the window
         JFrame frame = new JFrame("adunami IDE");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // set to fullscreen
         frame.setPreferredSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
@@ -53,6 +56,14 @@ public class IDE {
         NavbarPanel nav = new NavbarPanel(code, undoManager);
         frame.add(nav, BorderLayout.WEST);
 
+        // custom close function
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                closeWindow(frame, code);
+            }
+        });
+
         // display the window
         frame.setLocationRelativeTo(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -65,5 +76,18 @@ public class IDE {
 
 		// call window
         createWindow();
+    }
+
+    private static void closeWindow(JFrame frame, JTextArea textArea) {
+        switch(MonitorFile.saveChanges(textArea, 1)) {
+            case 0:
+                SaveButton.saveFile(textArea);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                break;
+            
+            default:
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                break;
+        }
     }
 }

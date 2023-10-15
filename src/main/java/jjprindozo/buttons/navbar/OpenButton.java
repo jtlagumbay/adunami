@@ -34,7 +34,7 @@ public class OpenButton extends NavbarButtonTheme {
       new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          switch(MonitorFile.saveChanges(textArea)) {
+          switch(MonitorFile.saveChanges(textArea, 0)) {
             case 0:
               SaveButton.saveFile(textArea);
               openFile(textArea);

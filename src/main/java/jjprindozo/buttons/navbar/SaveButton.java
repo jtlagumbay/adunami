@@ -54,6 +54,7 @@ public class SaveButton extends NavbarButtonTheme {
       "saveAction"
     );
 
+    // listens to changes DO NOT DELETE!!
     MonitorFile monitorFile = new MonitorFile(this, textArea);
   }
 

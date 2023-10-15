@@ -36,8 +36,9 @@ public class MonitorFile {
             return true;
     }
 
-    public static int saveChanges(JTextArea textArea) {
-        String options[] = {"Save", "Don't Save", "Cancel"};
+    public static int saveChanges(JTextArea textArea, int type) {
+        String options0[] = {"Save", "Don't Save", "Cancel"};
+        String options1[] = {"Save", "Don't Save"};
 
         if(MonitorFile.isModified(textArea) == true) {
             // JFrame frame = new JFrame();
@@ -45,11 +46,11 @@ public class MonitorFile {
                 null, 
                 "Do you want to save the changes you made?", 
                 "Save Changes", 
-                0, 
+                type, 
                 2, 
                 null, 
-                options, 
-                options[0]);
+                type == 0 ? options0 : options1, 
+                type == 0 ? options0[0] : options1[0]);
 
             return option;
         } else return -1;
