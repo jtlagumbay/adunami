@@ -6,8 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.undo.UndoManager;
 
+import jjprindozo.buttons.navbar.CopyButton;
+import jjprindozo.buttons.navbar.CutButton;
 import jjprindozo.buttons.navbar.NewFileButton;
 import jjprindozo.buttons.navbar.OpenButton;
+import jjprindozo.buttons.navbar.PasteButton;
 import jjprindozo.buttons.navbar.RedoButton;
 import jjprindozo.buttons.navbar.SaveAsButton;
 import jjprindozo.buttons.navbar.SaveButton;
@@ -33,11 +36,11 @@ public class NavbarPanel extends JPanel {
       /** <-------  SAVE FUNCTION  -------> **/
       SaveButton save = new SaveButton(textArea);
       add(save);
- 
+
       /** <-------  SAVE AS NEW FILE FUNCTION  -------> **/
       SaveAsButton saveAs = new SaveAsButton(textArea);
       add(saveAs);
-      
+
       /** <-------  UNDO FUNCTION  -------> **/
       UndoButton undo = new UndoButton(undoManager);
       add(undo);
@@ -45,6 +48,18 @@ public class NavbarPanel extends JPanel {
       /** <-------  REDO FUNCTION  -------> **/
       RedoButton redo = new RedoButton(undoManager);
       add(redo);
+      
+      /** <-------  CUT FUNCTION  -------> **/
+      CutButton cut = new CutButton();
+      add(cut);
+      
+      /** <-------  COPY FUNCTION  -------> **/
+      CopyButton copy = new CopyButton();
+      add(copy);
+      
+      /** <-------  PASTE FUNCTION  -------> **/
+      PasteButton paste = new PasteButton();
+      add(paste);
 
     }
 
