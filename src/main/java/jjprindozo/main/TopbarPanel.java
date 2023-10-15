@@ -13,12 +13,13 @@ import jjprindozo.buttons.topbar.RunButton;
 import jjprindozo.common.Colors;
 import jjprindozo.files.FileChangeListener;
 import jjprindozo.files.FileHandler;
+import jjprindozo.files.MonitorFile;
 
 public class TopbarPanel extends JPanel implements FileChangeListener {
     private static FileHandler fileHandler = FileHandler.getInstance();
     private static JLabel file;
 
-    public TopbarPanel() {
+    public TopbarPanel(JTextArea textArea) {
         // layout
         setLayout(new BorderLayout());
         setBackground(Colors.GREEN);
@@ -41,6 +42,9 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         file = new JLabel(fileName != null ? fileName.getName() : "Untitled Text");
         file.setFont(customFont);
         file.setForeground(Colors.WHITE);
+
+        // listens to unsaved changes DO NOT DELETE!!
+        MonitorFile monitorFile = new MonitorFile(null, textArea, file);
         
         add(file, BorderLayout.WEST);
 

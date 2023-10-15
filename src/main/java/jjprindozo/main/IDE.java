@@ -18,13 +18,6 @@ public class IDE {
     	
         //Create UndoManager for text area
     	UndoManager undoManager = new UndoManager();
-    	
-        // Initialize FileHandler and TopbarPanel
-        FileHandler fileHandler = FileHandler.getInstance();
-        TopbarPanel topbarPanel = new TopbarPanel();
-
-        // Register topbarPanel as a listener for file changes
-        fileHandler.setFileChangeListener(topbarPanel);
 
         // setup the window
         JFrame frame = new JFrame("adunami IDE");
@@ -39,12 +32,18 @@ public class IDE {
         // panel that houses textArea and topbar
         JPanel pane = new JPanel(new BorderLayout());
 
-        // topbar
-        TopbarPanel bar = new TopbarPanel();
-        pane.add(bar, BorderLayout.PAGE_START);
-
         // text area
         TextEditorTextArea code = new TextEditorTextArea(undoManager);
+
+        // topbar
+        TopbarPanel bar = new TopbarPanel(code);
+        pane.add(bar, BorderLayout.PAGE_START);
+    	
+        // Initialize FileHandler
+        FileHandler fileHandler = FileHandler.getInstance();
+
+        // Register topbarPanel as a listener for file changes
+        fileHandler.setFileChangeListener(bar);
 
         // scroller for text area
         JScrollPane scroll = new JScrollPane(code);        
