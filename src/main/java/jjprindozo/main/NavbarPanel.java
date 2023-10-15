@@ -37,7 +37,7 @@ public class NavbarPanel extends JPanel {
       add(newFile);
       
       /** <-------  OPEN FUNCTION  -------> **/
-      OpenButton open = new OpenButton(textArea);
+      OpenButton open = new OpenButton(textArea, undoManager);
       add(open);
 
       /** <-------  SAVE FUNCTION  -------> **/

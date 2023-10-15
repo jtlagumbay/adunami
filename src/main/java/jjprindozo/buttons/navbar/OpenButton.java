@@ -12,6 +12,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.undo.UndoManager;
 
 import jjprindozo.common.GlobalVar;
 import jjprindozo.files.CustomFileChooser;
@@ -35,7 +36,7 @@ public class OpenButton extends NavbarButtonTheme {
       }
   }
 
-  public OpenButton(JTextArea textArea) {
+  public OpenButton(JTextArea textArea, UndoManager undoManager) {
     super(
       GlobalVar.IMAGE_PATH + "open_file_icon.png", 
       "Open", 
@@ -46,14 +47,14 @@ public class OpenButton extends NavbarButtonTheme {
           switch(MonitorFile.saveChanges(textArea)) {
             case 0:
               SaveButton.saveFile(textArea);
-              openFile(textArea);
+              openFile(textArea, undoManager); // pass the UndoManager
               break;
             
             case 2:
               break;
             
             default:
-              openFile(textArea);
+              openFile(textArea, undoManager); // pass the UndoManager
               break;
           }
         }
@@ -75,7 +76,7 @@ public class OpenButton extends NavbarButtonTheme {
     else return null;
   }
   
-  private static void openFile(JTextArea textArea) {
+  private static void openFile(JTextArea textArea, UndoManager undoManager) {
     int returnVal = fileChooser.showOpenDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
       selectedFile = fileChooser.getSelectedFile();
@@ -84,14 +85,25 @@ public class OpenButton extends NavbarButtonTheme {
 				File file = new File(selectedFile.getAbsolutePath());
 
         if(file.exists()) {
+          
 					FileReader reader = new FileReader(selectedFile.getAbsolutePath());
 					BufferedReader br = new BufferedReader(reader);
 					textArea.read(br, null);
 					br.close();
 					textArea.requestFocus();
 				}
+
+
+        //Reset the UndoManager for the opened file
+        undoManager.discardAllEdits();   //Clear the undo history
+        
+        // Set the initial text to the text area
+        textArea.getDocument().addUndoableEditListener(undoManager);
+        
+
 			} catch (IOException e1) {
 				e1.printStackTrace();
+
 			}
 		}
 	}
