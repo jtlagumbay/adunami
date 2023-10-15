@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.UIManager;
 
 public class MonitorFile {
     private static FileHandler fileHandler = FileHandler.getInstance();
@@ -64,6 +65,12 @@ public class MonitorFile {
     }
 
     public static int saveChanges(JTextArea textArea) {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+
         String options[] = {"Save", "Don't Save", "Cancel"};
 
         if(MonitorFile.isModified(textArea) == true) {
