@@ -1,6 +1,8 @@
 package jjprindozo.files;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class FileHandler {
   private static FileHandler instance;
@@ -36,5 +38,17 @@ public class FileHandler {
     if (fileChangeListener != null) {
       fileChangeListener.onFileChange(selectedFile != null ? selectedFile.getName() : "Untitled Text");
     }
+  }
+
+  public String getFileContent() {
+    if(selectedFile != null && selectedFile.exists()) {
+      try {
+        return new String(Files.readAllBytes(selectedFile.toPath()));
+      } catch (IOException e) {
+        return null;
+      }
+
+    } else
+      return null;
   }
 }

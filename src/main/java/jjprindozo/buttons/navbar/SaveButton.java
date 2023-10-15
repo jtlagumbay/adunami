@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -20,6 +22,7 @@ import javax.swing.KeyStroke;
 import jjprindozo.common.GlobalVar;
 import jjprindozo.files.CustomFileChooser;
 import jjprindozo.files.FileHandler;
+import jjprindozo.files.MonitorFile;
 
 public class SaveButton extends NavbarButtonTheme {
   private static File selectedFile;
@@ -38,21 +41,23 @@ public class SaveButton extends NavbarButtonTheme {
 
   public SaveButton(JTextArea textArea) {
     super(
-        GlobalVar.IMAGE_PATH + "save_file_icon.png",
-        "Save",
-        ctrlSKeyStroke,
-        new AbstractAction() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            selectedFile = fileHandler.getSelectedFile(); 
-            saveFile(textArea);
-          }
-        },
-        "saveAction"
-      );
-   
+      GlobalVar.IMAGE_PATH + "save_file_icon.png",
+      "Save",
+      ctrlSKeyStroke,
+      new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          selectedFile = fileHandler.getSelectedFile(); 
+          saveFile(textArea);
+        }
+      },
+      "saveAction"
+    );
+
+    MonitorFile monitorFile = new MonitorFile(this, textArea);
   }
-  private static void saveFile(JTextArea textArea) {
+
+  public static void saveFile(JTextArea textArea) {
     // if there is a file being edited
     selectedFile = fileHandler.getSelectedFile();
 

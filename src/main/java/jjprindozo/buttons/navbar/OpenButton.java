@@ -16,6 +16,7 @@ import javax.swing.KeyStroke;
 import jjprindozo.common.GlobalVar;
 import jjprindozo.files.CustomFileChooser;
 import jjprindozo.files.FileHandler;
+import jjprindozo.files.MonitorFile;
 
 
 
@@ -33,7 +34,23 @@ public class OpenButton extends NavbarButtonTheme {
       new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          openFile(textArea);
+          switch(MonitorFile.saveChanges(textArea)) {
+            case 0:
+              SaveButton.saveFile(textArea);
+              openFile(textArea);
+              break;
+            
+            case 1:
+              openFile(textArea);
+              break;
+            
+            case 2:
+              break;
+            
+            default:
+              openFile(textArea);
+              break;
+          }
         }
       },
       "openAction"
