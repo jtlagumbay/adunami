@@ -1,7 +1,6 @@
 package jjprindozo.buttons.navbar;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -14,8 +13,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.awt.event.ActionEvent;
 import jjprindozo.common.GlobalVar;
 import jjprindozo.files.CustomFileChooser;
@@ -48,7 +45,7 @@ public class SaveAsButton extends NavbarButtonTheme {
             saveFileAs(textArea);
           }
         },
-        "saveAction");
+        "saveAsAction");
   }
   
   private static void saveFileAs(JTextArea textArea) {
