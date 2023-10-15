@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
-
+import javax.swing.text.DefaultEditorKit;
 
 import jjprindozo.common.GlobalVar;
 
@@ -26,12 +26,7 @@ public class CopyButton extends NavbarButtonTheme{
         GlobalVar.IMAGE_PATH + "copy_icon.png",
         "Copy",
         ctrlCKeyStroke,
-        new AbstractAction() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            System.out.println("Copy");
-          }
-        },
+        new DefaultEditorKit.CopyAction(),
         "copyAction"
       );
   }

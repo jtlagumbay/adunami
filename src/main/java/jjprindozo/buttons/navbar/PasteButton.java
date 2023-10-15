@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
-
+import javax.swing.text.DefaultEditorKit;
 
 import jjprindozo.common.GlobalVar;
 
@@ -26,12 +26,7 @@ public class PasteButton extends NavbarButtonTheme{
         GlobalVar.IMAGE_PATH + "paste_icon.png",
         "Paste",
         ctrlVKeyStroke,
-        new AbstractAction() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            System.out.println("Paste");
-          }
-        },
+        new DefaultEditorKit.PasteAction(),
         "pasteAction"
       );
   }
