@@ -26,7 +26,7 @@ public class NavbarPanel extends JPanel {
       setBackground(Colors.DARKGRAY);
 		
       /** <-------  NEW FUNCTION  -------> **/
-      NewFileButton newFile = new NewFileButton();
+      NewFileButton newFile = new NewFileButton(textArea);
       add(newFile);
       
       /** <-------  OPEN FUNCTION  -------> **/
