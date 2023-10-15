@@ -13,6 +13,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import jjprindozo.common.GlobalVar;
 import jjprindozo.files.CustomFileChooser;
@@ -46,6 +48,17 @@ public class SaveAsButton extends NavbarButtonTheme {
           }
         },
         "saveAsAction");
+
+    Timer timer = new Timer(true);
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            if(textArea.getText().trim().isEmpty())
+              setEnabled(false);
+            else
+              setEnabled(true);
+        }
+    }, 0, 100);
   }
   
   private static void saveFileAs(JTextArea textArea) {
