@@ -10,7 +10,16 @@ import javax.swing.KeyStroke;
 import javax.swing.undo.UndoManager;
 
 public class RedoButton extends NavbarButtonTheme {
-  private static KeyStroke ctrlShiftZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+  private static KeyStroke ctrlShiftZKeyStroke;
+  static {
+    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+          // On macOS, use Command + Shift + Z
+          ctrlShiftZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+      } else {
+          // On other platforms, use Ctrl + Shift + Z
+          ctrlShiftZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+      }
+  }
 
   public RedoButton(UndoManager undoManager) {
     super(

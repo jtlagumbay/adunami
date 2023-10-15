@@ -11,7 +11,17 @@ import javax.swing.KeyStroke;
 import javax.swing.undo.UndoManager;
 
 public class UndoButton extends NavbarButtonTheme {
-    private static KeyStroke ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK);
+  private static KeyStroke ctrlZKeyStroke;
+  static {
+    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+          // On macOS, use Command + Z
+          ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.META_DOWN_MASK);
+      } else {
+          // On other platforms, use Ctrl + Z
+          ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK);
+      }
+  }
+
   public UndoButton(UndoManager undoManager) {
     super(
         GlobalVar.IMAGE_PATH + "undo_icon.png",

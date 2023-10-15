@@ -27,10 +27,10 @@ public class SaveAsButton extends NavbarButtonTheme {
   private static KeyStroke ctrlShiftSKeyStroke;
   static {
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-      // On macOS, use Command + S
+      // On macOS, use Command + Shift + S
       ctrlShiftSKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
     } else {
-      // On other platforms, use Ctrl + S
+      // On other platforms, use Ctrl + Shift + S
       ctrlShiftSKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
     }
   }

@@ -12,10 +12,10 @@ public class PasteButton extends NavbarButtonTheme{
   private static KeyStroke ctrlVKeyStroke;
   static {
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-          // On macOS, use Command + S
+          // On macOS, use Command + V
           ctrlVKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK);
       } else {
-          // On other platforms, use Ctrl + S
+          // On other platforms, use Ctrl + V
           ctrlVKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK);
       }
   }

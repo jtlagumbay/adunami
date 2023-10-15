@@ -8,7 +8,16 @@ import javax.swing.KeyStroke;
 import jjprindozo.common.GlobalVar;
 
 public class RunButton extends TopbarButtonTheme {
-  private static KeyStroke ctrlRKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK);
+  private static KeyStroke ctrlRKeyStroke;
+  static {
+    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+          // On macOS, use Command + R
+          ctrlRKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.META_DOWN_MASK);
+      } else {
+          // On other platforms, use Ctrl + R
+          ctrlRKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK);
+      }
+  }
 
   public RunButton() {
     super(

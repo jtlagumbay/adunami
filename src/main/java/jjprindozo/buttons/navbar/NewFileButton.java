@@ -13,8 +13,17 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 public class NewFileButton extends NavbarButtonTheme {
-  private static KeyStroke ctrlNKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
+  private static KeyStroke ctrlNKeyStroke;
   private static FileHandler fileHandler = FileHandler.getInstance();
+  static {
+    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+          // On macOS, use Command + N
+          ctrlNKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.META_DOWN_MASK);
+      } else {
+          // On other platforms, use Ctrl + N
+          ctrlNKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
+      }
+  }
 
   public NewFileButton(JTextArea textArea) {
     super(

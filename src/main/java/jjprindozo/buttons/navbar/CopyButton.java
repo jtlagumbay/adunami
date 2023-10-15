@@ -12,10 +12,10 @@ public class CopyButton extends NavbarButtonTheme{
   private static KeyStroke ctrlCKeyStroke;
   static {
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-          // On macOS, use Command + S
+          // On macOS, use Command + C
           ctrlCKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK);
       } else {
-          // On other platforms, use Ctrl + S
+          // On other platforms, use Ctrl + C
           ctrlCKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK);
       }
   }

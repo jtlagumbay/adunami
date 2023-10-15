@@ -24,7 +24,16 @@ public class OpenButton extends NavbarButtonTheme {
   private static File selectedFile;
   private static FileHandler fileHandler = FileHandler.getInstance();
   private static JFileChooser fileChooser = new CustomFileChooser();
-  private static KeyStroke ctrlOKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK);
+  private static KeyStroke ctrlOKeyStroke;
+  static {
+    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+          // On macOS, use Command + O
+          ctrlOKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.META_DOWN_MASK);
+      } else {
+          // On other platforms, use Ctrl + O
+          ctrlOKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK);
+      }
+  }
 
   public OpenButton(JTextArea textArea) {
     super(
