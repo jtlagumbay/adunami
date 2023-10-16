@@ -27,6 +27,9 @@ public class PasteButton extends NavbarButtonTheme{
         new DefaultEditorKit.PasteAction(),
         "pasteAction"
       );
+
+     // set a tooltip with a black background
+     setToolTipText("<html><div style='background-color: black; color: white;'>Paste</div></html>");
   }
   
 }

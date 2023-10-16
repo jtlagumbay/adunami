@@ -18,7 +18,6 @@ import jjprindozo.buttons.navbar.SaveButton;
 import jjprindozo.buttons.navbar.UndoButton;
 import jjprindozo.common.Colors;
 
-
 public class NavbarPanel extends JPanel {    
   // private static FileHandler fileHandler = FileHandler.getInstance();
     public NavbarPanel(JTextArea textArea, UndoManager undoManager) {
@@ -31,8 +30,8 @@ public class NavbarPanel extends JPanel {
     } catch (Exception e) {
         e.printStackTrace();
     }
-		
-      /** <-------  NEW FUNCTION  -------> **/
+
+ /** <-------  NEW FUNCTION  -------> **/
       NewFileButton newFile = new NewFileButton(textArea);
       add(newFile);
       
@@ -48,7 +47,7 @@ public class NavbarPanel extends JPanel {
       SaveAsButton saveAs = new SaveAsButton(textArea);
       add(saveAs);
 
-      /** <-------  UNDO FUNCTION  -------> **/
+ /** <-------  UNDO FUNCTION  -------> **/
       UndoButton undo = new UndoButton(undoManager);
       add(undo);
       
@@ -63,8 +62,8 @@ public class NavbarPanel extends JPanel {
       /** <-------  COPY FUNCTION  -------> **/
       CopyButton copy = new CopyButton();
       add(copy);
-      
-      /** <-------  PASTE FUNCTION  -------> **/
+
+  /** <-------  PASTE FUNCTION  -------> **/
       PasteButton paste = new PasteButton();
       add(paste);
 

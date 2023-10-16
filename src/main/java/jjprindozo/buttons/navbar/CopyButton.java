@@ -27,6 +27,9 @@ public class CopyButton extends NavbarButtonTheme{
         new DefaultEditorKit.CopyAction(),
         "copyAction"
       );
+
+     // set a tooltip with a black background
+     setToolTipText("<html><div style='background-color: black; color: white;'>Copy</div></html>");
   }
   
 }

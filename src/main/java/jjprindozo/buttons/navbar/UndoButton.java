@@ -35,6 +35,9 @@ public class UndoButton extends NavbarButtonTheme {
         },
         "undoAction"
       );
+
+    // set a tooltip with a black background
+    setToolTipText("<html><div style='background-color: black; color: white;'>Undo</div></html>");
   }
 
   private static void undoText(UndoManager undoManager) {

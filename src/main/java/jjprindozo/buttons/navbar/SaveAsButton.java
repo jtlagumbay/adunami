@@ -49,6 +49,9 @@ public class SaveAsButton extends NavbarButtonTheme {
         },
         "saveAsAction");
 
+     // set a tooltip with a black background
+     setToolTipText("<html><div style='background-color: black; color: white;'>Save as</div></html>");
+
     Timer timer = new Timer(true);
     timer.scheduleAtFixedRate(new TimerTask() {
         @Override

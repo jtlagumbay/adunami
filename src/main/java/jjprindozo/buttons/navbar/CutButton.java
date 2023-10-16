@@ -27,6 +27,9 @@ public class CutButton extends NavbarButtonTheme{
         new DefaultEditorKit.CutAction(),
         "cutAction"
       );
+
+     // set a tooltip with a black background
+     setToolTipText("<html><div style='background-color: black; color: white;'>Cut</div></html>");
   }
   
 }

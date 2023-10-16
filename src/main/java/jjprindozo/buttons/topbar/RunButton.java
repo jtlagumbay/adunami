@@ -32,5 +32,7 @@ public class RunButton extends TopbarButtonTheme {
         },
         "runAction"
     );
+     // set a tooltip with a black background
+     setToolTipText("<html><div style='background-color: black; color: white;'>Run</div></html>");
   }
 }
