@@ -21,6 +21,8 @@ public class TextEditorTextArea extends JTextArea {
         // Register the UndoManager with the text area
         getDocument().addUndoableEditListener(undoManager);
 
+        // Set the caret color to white
+        setCaretColor(Colors.WHITE);
         
     }
 
