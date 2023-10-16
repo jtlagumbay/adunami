@@ -1,4 +1,8 @@
 package jjprindozo.files;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,7 +56,33 @@ public class MonitorFile {
 
     private static void updateLabel(JLabel file) {
         String fileName = fileHandler.getSelectedFile() != null ? fileHandler.getSelectedFile().getName() : "Untitled Text";
-        file.setText(fileName + (hasChange == true ? "*" : ""));
+        file.setText(fileName + (hasChange == true ? "*" : "")); 
+         Font customFont = new Font("Jost", Font.BOLD, 14);
+        try {
+            // Load the font from the file
+            // InputStream inputStream = getClass().getResourceAsStream("jost.ttf");
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("/jost.ttf")).deriveFont(12f);
+        
+            // Derive the desired size (you can adjust this as needed)
+            // Font customSizedFont = customFont.deriveFont(14f);
+        
+            // Set the font for your component
+            // .setFont(customSizedFont);
+        
+        }
+         catch (IOException e) {
+            e.printStackTrace();
+        } catch(FontFormatException e) {
+            e.printStackTrace();
+        }
+        if (hasChange) {
+            Font font = file.getFont();
+            file.setFont(customFont);
+        } else {
+            // If no unsaved changes, set the font back to regular
+            Font font = file.getFont();
+            file.setFont(new Font(font.getName(), Font.PLAIN, font.getSize()));
+        }
     }
 
     public static boolean isModified(JTextArea textArea) {

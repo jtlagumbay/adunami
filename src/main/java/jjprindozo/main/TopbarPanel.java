@@ -26,11 +26,20 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         setBorder(new EmptyBorder(0, 10, 0, 10));
 
         // custom font: jost
-        Font customFont = new Font("sans-serif", Font.BOLD, 14);
+        Font customFont = new Font("Jost", Font.BOLD, 14);
         try {
-          InputStream inputStream = getClass().getResourceAsStream("/fonts/jost.ttf");
-            customFont = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(14f);
-        } catch (IOException e) {
+            // Load the font from the file
+            // InputStream inputStream = getClass().getResourceAsStream("jost.ttf");
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("jost.ttf")).deriveFont(12f);
+        
+            // Derive the desired size (you can adjust this as needed)
+            // Font customSizedFont = customFont.deriveFont(14f);
+        
+            // Set the font for your component
+            // .setFont(customSizedFont);
+        
+        }
+         catch (IOException e) {
             e.printStackTrace();
         } catch(FontFormatException e) {
             e.printStackTrace();
@@ -39,7 +48,7 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         // file name
         File fileName = fileHandler.getSelectedFile(); 
 
-        file = new JLabel(fileName != null ? fileName.getName() : "Untitled Text");
+        file = new JLabel(fileName != null ? fileName.getName() : "Untitled");
         file.setFont(customFont);
         file.setForeground(Colors.WHITE);
 
