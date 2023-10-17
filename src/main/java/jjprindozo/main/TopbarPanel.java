@@ -5,8 +5,6 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 import jjprindozo.buttons.topbar.CompileButton;
 import jjprindozo.buttons.topbar.RunButton;
@@ -25,36 +23,15 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         setBackground(Colors.GREEN);
         setBorder(new EmptyBorder(0, 10, 0, 10));
 
-        // custom font: jost
-        Font customFont = new Font("Jost", Font.BOLD, 14);
-        try {
-            // Load the font from the file
-            // InputStream inputStream = getClass().getResourceAsStream("jost.ttf");
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("jost.ttf")).deriveFont(12f);
-        
-            // Derive the desired size (you can adjust this as needed)
-            // Font customSizedFont = customFont.deriveFont(14f);
-        
-            // Set the font for your component
-            // .setFont(customSizedFont);
-        
-        }
-         catch (IOException e) {
-            e.printStackTrace();
-        } catch(FontFormatException e) {
-            e.printStackTrace();
-        }
-
         // file name
         File fileName = fileHandler.getSelectedFile(); 
 
         file = new JLabel(fileName != null ? fileName.getName() : "Untitled");
-        file.setFont(customFont);
         file.setForeground(Colors.WHITE);
 
         // listens to unsaved changes DO NOT DELETE!!
         @SuppressWarnings("all")
-        MonitorFile monitorFile = new MonitorFile(null, textArea, file);
+        MonitorFile monitorFile = new MonitorFile(textArea, file);
         
         add(file, BorderLayout.WEST);
 
