@@ -64,11 +64,6 @@ public class OpenButton extends NavbarButtonTheme {
     
     // set a tooltip with a black background
     setToolTipText("<html><div style='background-color: black; color: white;'>Open</div></html>");
-    
-    // addActionListener(saveAction);
-    // getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ctrlSKeyStroke, "saveAction");
-    // getActionMap().put("saveAction", saveAction);
-
   }
   
   public File getSelectedFile() {

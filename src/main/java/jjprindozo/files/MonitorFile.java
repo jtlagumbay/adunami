@@ -74,7 +74,6 @@ public class MonitorFile {
         String options[] = {"Save", "Don't Save", "Cancel"};
 
         if(MonitorFile.isModified(textArea) == true) {
-            // JFrame frame = new JFrame();
             int option = JOptionPane.showOptionDialog(
                 null, 
                 "Do you want to save the changes you made?", 

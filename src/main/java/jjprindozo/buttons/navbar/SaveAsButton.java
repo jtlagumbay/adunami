@@ -65,7 +65,6 @@ public class SaveAsButton extends NavbarButtonTheme {
   }
   
   private static void saveFileAs(JTextArea textArea) {
-    // if there is a file being edited
     selectedFile = fileHandler.getSelectedFile();
 
     int result = fileChooser.showSaveDialog(textArea);

@@ -71,9 +71,9 @@ public class IDE {
     }
 
     public static void main(String[] args) {
-      FlatDarculaLaf.setup();
+        FlatDarculaLaf.setup();
 
-		// call window
+        // call window
         createWindow();
     }
 

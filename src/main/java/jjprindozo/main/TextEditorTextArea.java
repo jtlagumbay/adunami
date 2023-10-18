@@ -4,13 +4,11 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
-import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
 import jjprindozo.common.Colors;
@@ -29,7 +27,7 @@ public class TextEditorTextArea extends JTextArea {
         // Set the caret color to white
         setCaretColor(Colors.WHITE);
 
-        // Add a KeyListener to update line numbers when Enter is pressed
+        // Add a KeyListener to update line numbers when Enter || Backspace || Delete is pressed
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -57,12 +55,11 @@ public class TextEditorTextArea extends JTextArea {
         FontMetrics fontMetrics = g.getFontMetrics();
         Insets insets = getInsets();
         int lineHeight = fontMetrics.getHeight();
-        int startY = insets.top + fontMetrics.getAscent(); // Adjusted starting position
+        int startY = insets.top + fontMetrics.getAscent();
 
         int lineCount = getLineCount();
 
         for (int i = 0; i < lineCount; i++) {
-            // Adjusted starting position and width of the line number area
             g.drawString(String.valueOf(i + 1), 5, startY);
             startY += lineHeight;
         }
@@ -72,7 +69,7 @@ public class TextEditorTextArea extends JTextArea {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                repaint(); // Trigger a repaint to update line numbers
+                repaint();
             }
         });
     }

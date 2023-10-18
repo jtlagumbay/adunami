@@ -4,4 +4,3 @@ public class GlobalVar {
   public static final String IMAGE_PATH = "/images/";
   public static final String FILE_EXTENSION = "txt"; // TO CHANGE WHEN WE HAVE OWN PROGRAMMING LANGUAGE
 }
-//src\main\java\jjprindozo\images

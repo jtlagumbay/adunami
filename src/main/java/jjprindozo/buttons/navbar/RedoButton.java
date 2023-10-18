@@ -41,10 +41,10 @@ public class RedoButton extends NavbarButtonTheme {
   private static void redoText(UndoManager undoManager) {
     try {
       if (undoManager.canRedo()) {
-        undoManager.redo(); // Perform redo action
+        undoManager.redo();
       }
     } catch (Exception ex){
-      ex.printStackTrace(); // Handle any exceptions
+      ex.printStackTrace();
     }
   }
 }
