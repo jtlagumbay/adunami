@@ -1,5 +1,13 @@
 package jjprindozo.main;
 
+/*
+ * NOTE: 
+ * This code is from an open-source snake game.
+ * Minor changes were done to tailor-fit the code to this application
+ * 
+ * Source Code: https://zetcode.com/javagames/snake/
+ */
+
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
