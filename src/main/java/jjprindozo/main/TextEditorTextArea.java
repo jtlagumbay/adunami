@@ -16,7 +16,6 @@ import javax.swing.undo.UndoManager;
 import jjprindozo.common.Colors;
 
 public class TextEditorTextArea extends JTextArea {
-    int line_number = 1;
     public TextEditorTextArea(UndoManager undoManager) {
         setEditable(true);
         setBackground(Colors.LIGHTGRAY);
@@ -35,24 +34,15 @@ public class TextEditorTextArea extends JTextArea {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == '\n') {
-                    line_number++;
-                }
-                if(e.getKeyChar() == '\b') {
-                     int caretPosition = getCaretPosition();
-                try {
-                    Rectangle caretRectangle = modelToView(caretPosition);
-                    if (caretRectangle != null) {
-                        int horizontalCaretPosition = caretRectangle.x; // Horizontal caret position
-                        if(horizontalCaretPosition == 40 && line_number > 1) {
-                            line_number--;
-                        }
-                    }
-                } catch(BadLocationException ee) {
-                        ee.printStackTrace();
-                }
-                }
-                
                     updateLineNumbers();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    updateLineNumbers();
+                }
             }
         });
     }
@@ -68,8 +58,8 @@ public class TextEditorTextArea extends JTextArea {
         Insets insets = getInsets();
         int lineHeight = fontMetrics.getHeight();
         int startY = insets.top + fontMetrics.getAscent(); // Adjusted starting position
-        
-        int lineCount = line_number;
+
+        int lineCount = getLineCount();
 
         for (int i = 0; i < lineCount; i++) {
             // Adjusted starting position and width of the line number area
@@ -78,7 +68,7 @@ public class TextEditorTextArea extends JTextArea {
         }
     }
 
-     private void updateLineNumbers() {
+    private void updateLineNumbers() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
