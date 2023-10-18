@@ -50,6 +50,20 @@ public class IDE {
         // Register topbarPanel as a listener for file changes
         fileHandler.setFileChangeListener(bar);
 
+        // panel for the right side components
+        JPanel right = new JPanel(new BorderLayout());
+
+        // adunami display
+        Adunami display = new Adunami();
+        right.add(display, BorderLayout.SOUTH);
+
+        frame.setFocusTraversalPolicy(new LayoutFocusTraversalPolicy() {
+            @Override
+            public Component getDefaultComponent(Container aContainer) {
+                return display;  // The component you want to focus on
+            }
+        });
+
         // terminal
         JPanel terminal = new JPanel(new BorderLayout());
 
@@ -60,10 +74,10 @@ public class IDE {
 
         TerminalArea term = new TerminalArea();
         terminal.add(new JScrollPane(term));
-        text.add(terminal, BorderLayout.EAST);
-
+        right.add(terminal);
+        
+        text.add(right, BorderLayout.EAST);
         pane.add(text);
-
         frame.add(pane);
 
         // navbar
@@ -85,13 +99,6 @@ public class IDE {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        FlatDarculaLaf.setup();
-
-        // call window
-        createWindow();
-    }
-
     private static void closeWindow(JFrame frame, JTextArea textArea) {
         switch(MonitorFile.saveChanges(textArea)) {
             case 0:
@@ -107,5 +114,12 @@ public class IDE {
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 break;
         }
+    }
+
+    public static void main(String[] args) {
+        FlatDarculaLaf.setup();
+
+        // call window
+        createWindow();
     }
 }
