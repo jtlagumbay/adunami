@@ -1,29 +1,21 @@
 package jjprindozo.main;
 
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Insets;
-
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.undo.UndoManager;
+import javax.swing.*;
 
 import jjprindozo.common.Colors;
 
-public class TextEditorTextArea extends JTextArea {
-    public TextEditorTextArea(UndoManager undoManager) {
-        setEditable(true);
-        setBackground(Colors.LIGHTGRAY);
+import java.awt.*;
+
+public class TerminalArea extends JTextArea {
+    public TerminalArea() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        setPreferredSize(new Dimension((int) (screenSize.getWidth()/4), HEIGHT));
+        setBackground(Colors.BLACK);
         setForeground(Colors.WHITE);
-        setFont(new Font("monospaced", Font.PLAIN, 16));
+        setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
+        setEditable(true);  // Allow user input
         setMargin(new Insets(0, 40, 0, 0));
-
-        // Register the UndoManager with the text area
-        getDocument().addUndoableEditListener(undoManager);
-
-        // Set the caret color to white
-        setCaretColor(Colors.WHITE);
 
         updateLineNumbers();
     }
@@ -43,7 +35,7 @@ public class TextEditorTextArea extends JTextArea {
         int lineCount = getLineCount();
 
         for (int i = 0; i < lineCount; i++) {
-            g.drawString(String.valueOf(i + 1), 5, startY);
+            g.drawString(">", 5, startY);
             startY += lineHeight;
         }
     }
@@ -57,3 +49,5 @@ public class TextEditorTextArea extends JTextArea {
         });
     }
 }
+
+

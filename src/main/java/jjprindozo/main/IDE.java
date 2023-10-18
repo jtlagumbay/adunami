@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.undo.UndoManager;
 
 import jjprindozo.buttons.navbar.SaveButton;
+import jjprindozo.common.Fonts;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
@@ -29,11 +30,15 @@ public class IDE {
         ImageIcon img = new ImageIcon("src/main/resources/images/logo.png");
         frame.setIconImage(img.getImage());
 
-        // panel that houses textArea and topbar
+        // panel that houses the text and topbar
         JPanel pane = new JPanel(new BorderLayout());
+
+        // panel that houses textArea and Terminal
+        JPanel text = new JPanel(new BorderLayout());
 
         // text area
         TextEditorTextArea code = new TextEditorTextArea(undoManager);
+        text.add(new JScrollPane(code));
 
         // topbar
         TopbarPanel bar = new TopbarPanel(code);
@@ -45,9 +50,19 @@ public class IDE {
         // Register topbarPanel as a listener for file changes
         fileHandler.setFileChangeListener(bar);
 
-        // scroller for text area
-        JScrollPane scroll = new JScrollPane(code);        
-        pane.add(scroll);
+        // terminal
+        JPanel terminal = new JPanel(new BorderLayout());
+
+        JLabel terminalLabel = new JLabel("Output");
+        terminalLabel.setFont(Fonts.getRegular());
+        terminalLabel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
+        terminal.add(terminalLabel, BorderLayout.NORTH);
+
+        TerminalArea term = new TerminalArea();
+        terminal.add(new JScrollPane(term));
+        text.add(terminal, BorderLayout.EAST);
+
+        pane.add(text);
 
         frame.add(pane);
 
