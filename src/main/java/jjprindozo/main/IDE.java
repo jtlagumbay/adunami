@@ -7,7 +7,7 @@ import javax.swing.undo.UndoManager;
 
 import jjprindozo.buttons.navbar.SaveButton;
 
-// import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarculaLaf;
 
 import jjprindozo.files.FileHandler;
 import jjprindozo.files.MonitorFile;
@@ -71,7 +71,7 @@ public class IDE {
     }
 
     public static void main(String[] args) {
-      // FlatDarculaLaf.setup();
+      FlatDarculaLaf.setup();
 
 		// call window
         createWindow();

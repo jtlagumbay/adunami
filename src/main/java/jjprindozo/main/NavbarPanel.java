@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
 import javax.swing.undo.UndoManager;
 
 import jjprindozo.buttons.navbar.CopyButton;
@@ -24,14 +23,8 @@ public class NavbarPanel extends JPanel {
       // JPanel layout
       setLayout(new GridLayout(15, 1, 5, 5));
       setBackground(Colors.DARKGRAY);
-      
-    try {
-        UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
 
- /** <-------  NEW FUNCTION  -------> **/
+      /** <-------  NEW FUNCTION  -------> **/
       NewFileButton newFile = new NewFileButton(textArea);
       add(newFile);
       
