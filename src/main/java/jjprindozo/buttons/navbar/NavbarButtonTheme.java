@@ -41,7 +41,7 @@ public class NavbarButtonTheme extends JButton {
     setBorder(null);
     setFocusPainted(false);
     setPreferredSize(new Dimension(50, 50));
-    setToolTipText(tootlTipText);
+    setToolTipText("<html><div style='background-color: black; color: white;'>"+tootlTipText+"</div></html>");
     setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
   }
   

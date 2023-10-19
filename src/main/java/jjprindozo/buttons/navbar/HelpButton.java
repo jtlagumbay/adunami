@@ -33,11 +33,9 @@ public class HelpButton extends NavbarButtonTheme {
           }
         },
         "helpAction"
-      );
+    );
 
-    // set a tooltip with a black background
-    setToolTipText("<html><div style='background-color: black; color: white;'>Help</div></html>");
-  }
+    }
 
   private static void showHelp() {
     // Code here

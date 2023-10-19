@@ -28,8 +28,7 @@ public class PasteButton extends NavbarButtonTheme{
         "pasteAction"
       );
 
-     // set a tooltip with a black background
-     setToolTipText("<html><div style='background-color: black; color: white;'>Paste</div></html>");
-  }
+  
+    }
   
 }
