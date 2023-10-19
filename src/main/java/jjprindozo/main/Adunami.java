@@ -44,7 +44,6 @@ public class Adunami extends JPanel implements ActionListener {
     private boolean downDirection = false;
     private boolean inGame = true;
     private boolean button = false;
-    private boolean isFocused = false;
 
     private Timer timer;
     private Image ball;
@@ -57,10 +56,8 @@ public class Adunami extends JPanel implements ActionListener {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Toggle the focus simulation flag
-                isFocused = !isFocused;
-                requestFocusInWindow(isFocused);
-                repaint();  // Repaint to update the appearance
+                requestFocusInWindow(true);
+                repaint();
             }
         });
     }
@@ -109,11 +106,13 @@ public class Adunami extends JPanel implements ActionListener {
         if(!isFocusOwner()) {
             timer.stop();
 
-            String msg = "Game Paused. Click here to play.";
-            FontMetrics metr = getFontMetrics(Fonts.getRegular());
-            g.setColor(Color.WHITE);
-            g.setFont(Fonts.getRegular());
-            g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+            if(button == false) {
+                String msg = "Game Paused. Click here to play.";
+                FontMetrics metr = getFontMetrics(Fonts.getRegular());
+                g.setColor(Color.WHITE);
+                g.setFont(Fonts.getRegular());
+                g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+            }
         } else
             timer.start();
         
