@@ -31,7 +31,6 @@ public class CompileButton extends TopbarButtonTheme {
         },
         "runAction"
     );
-   // set a tooltip with a black background
-   setToolTipText("<html><div style='background-color: black; color: white;'>Compile</div></html>");
+  
   }
 }

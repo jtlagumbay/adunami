@@ -43,7 +43,7 @@ public class TopbarButtonTheme extends JButton {
     setBorder(null);
     setFocusPainted(false);
     setPreferredSize(new Dimension(30, 30));
-    setToolTipText(tootlTipText);
+    setToolTipText("<html><div style='background-color: black; color: white;'>"+tootlTipText+"</div></html>");
     setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
   }
   
