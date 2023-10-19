@@ -7,6 +7,7 @@ import javax.swing.undo.UndoManager;
 
 import jjprindozo.buttons.navbar.SaveButton;
 import jjprindozo.common.Fonts;
+import jjprindozo.splash.SplashScreen;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
@@ -118,8 +119,10 @@ public class IDE {
 
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
-
-        // call window
-        createWindow();
+        
+        SplashScreen sp = new SplashScreen();
+        
+        if(!sp.isVisible())
+            createWindow();
     }
 }
