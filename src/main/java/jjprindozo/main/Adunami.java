@@ -1,5 +1,7 @@
 package jjprindozo.main;
 
+import java.awt.Color;
+
 /*
  * NOTE: 
  * This code is from an open-source snake game.
@@ -10,6 +12,7 @@ package jjprindozo.main;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -103,6 +106,17 @@ public class Adunami extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        if(!isFocusOwner()) {
+            timer.stop();
+
+            String msg = "Game Paused. Click here to play.";
+            FontMetrics metr = getFontMetrics(Fonts.getRegular());
+            g.setColor(Color.WHITE);
+            g.setFont(Fonts.getRegular());
+            g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+        } else
+            timer.start();
+        
         doDrawing(g);
     }
     
