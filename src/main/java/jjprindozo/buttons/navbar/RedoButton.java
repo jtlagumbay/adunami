@@ -33,10 +33,9 @@ public class RedoButton extends NavbarButtonTheme {
           }
         },
         "redoAction"
-      );
-     // set a tooltip with a black background
-     setToolTipText("<html><div style='background-color: black; color: white;'>Redo</div></html>");
-  }
+    );
+ 
+    }
 
   private static void redoText(UndoManager undoManager) {
     try {

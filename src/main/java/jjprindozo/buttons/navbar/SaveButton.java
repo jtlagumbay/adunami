@@ -50,8 +50,6 @@ public class SaveButton extends NavbarButtonTheme {
       "saveAction"
     );
 
-     // set a tooltip with a black background
-     setToolTipText("<html><div style='background-color: black; color: white;'>Save</div></html>");
 
     // listens to changes DO NOT DELETE!!
     @SuppressWarnings("all")

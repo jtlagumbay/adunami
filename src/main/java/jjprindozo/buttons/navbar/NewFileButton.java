@@ -49,11 +49,9 @@ public class NewFileButton extends NavbarButtonTheme {
           }
         },
         "newFileAction"
-        );
+    );
 
-    // set a tooltip with a black background
-    setToolTipText("<html><div style='background-color: black; color: white;'>New File</div></html>");
-  }
+      }
   
   private static void NewFile(JTextArea textArea) {
     textArea.setText("// write your code here\n ");

@@ -61,9 +61,7 @@ public class OpenButton extends NavbarButtonTheme {
       },
       "openAction"
     );
-    
-    // set a tooltip with a black background
-    setToolTipText("<html><div style='background-color: black; color: white;'>Open</div></html>");
+ 
   }
   
   public File getSelectedFile() {
