@@ -8,6 +8,7 @@ import javax.swing.undo.UndoManager;
 
 import jjprindozo.buttons.navbar.CopyButton;
 import jjprindozo.buttons.navbar.CutButton;
+import jjprindozo.buttons.navbar.HelpButton;
 import jjprindozo.buttons.navbar.NewFileButton;
 import jjprindozo.buttons.navbar.OpenButton;
 import jjprindozo.buttons.navbar.PasteButton;
@@ -58,6 +59,10 @@ public class NavbarPanel extends JPanel {
       /** <-------  PASTE FUNCTION  -------> **/
       PasteButton paste = new PasteButton();
       add(paste);
+
+      /** <-------  PASTE FUNCTION  -------> **/
+      HelpButton help = new HelpButton();
+      add(help);
 
     }
 
