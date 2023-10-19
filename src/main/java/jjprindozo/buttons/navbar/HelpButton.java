@@ -11,8 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 
@@ -28,7 +26,6 @@ public class HelpButton extends NavbarButtonTheme {
         }
     }
 
-<<<<<<< HEAD
     public HelpButton() {
         super(
             GlobalVar.IMAGE_PATH + "help_icon.png",
@@ -45,22 +42,6 @@ public class HelpButton extends NavbarButtonTheme {
 
         // set a tooltip with a black background
         setToolTipText("<html><div style='background-color: black; color: white;'>Help</div></html>");
-=======
-  public HelpButton() {
-    super(
-        GlobalVar.IMAGE_PATH + "help_icon.png",
-        "Help",
-        ctrlSlashKeyStroke,
-        new AbstractAction() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            showHelp();
-          }
-        },
-        "helpAction"
-    );
-
->>>>>>> 8c0bf413ab87f2a32b29b6e48ed0ce656441ead4
     }
 
     private static void showHelp() {
