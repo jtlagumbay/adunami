@@ -17,43 +17,43 @@ public class IDE {
     // GUI Window
     private static void createWindow() {
     	
-        //Create UndoManager for text area
+        // Initialize
     	UndoManager undoManager = new UndoManager();
+    	FileHandler fileHandler = FileHandler.getInstance();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         // setup the window
-        JFrame frame = new JFrame("adunami IDE");
+        JFrame frame = new JFrame("adunami IDE"); // navbar && pane
 
-        // set to fullscreen
         frame.setPreferredSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
-
-        // change icon
         ImageIcon img = new ImageIcon("src/main/resources/images/logo.png");
         frame.setIconImage(img.getImage());
 
-        // panel that houses the text and topbar
-        JPanel pane = new JPanel(new BorderLayout());
+        /*<------------ JPANELS ------------>*/
+        JPanel pane = new JPanel(new BorderLayout()); // topbar && cont
+        JPanel cont = new JPanel(new BorderLayout()); // text && right
+        JPanel right = new JPanel(new BorderLayout()); // quotes && games
 
-        // panel that houses textArea and Terminal
-        JPanel text = new JPanel(new BorderLayout());
-
-        // text area
+        /*<------------ TEXT AREA ------------>*/
         TextEditorTextArea code = new TextEditorTextArea(undoManager);
-        text.add(new JScrollPane(code));
 
-        // topbar
-        TopbarPanel bar = new TopbarPanel(code);
-        pane.add(bar, BorderLayout.PAGE_START);
-    	
-        // Initialize FileHandler
-        FileHandler fileHandler = FileHandler.getInstance();
+        /*<------------ TERMINAL ------------>*/
+        JPanel terminal = new JPanel(new BorderLayout());
 
-        // Register topbarPanel as a listener for file changes
-        fileHandler.setFileChangeListener(bar);
+        JLabel terminalLabel = new JLabel("Output");
+        terminalLabel.setFont(Fonts.getRegular());
+        terminalLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 5));
+        terminal.add(terminalLabel, BorderLayout.NORTH);
 
-        // panel for the right side components
-        JPanel right = new JPanel(new BorderLayout());
+        TerminalArea term = new TerminalArea();
+        terminal.add(new JScrollPane(term));
+        
 
-        // adunami display
+        JSplitPane text = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(code), terminal); // textarea && terminal
+        text.setDividerLocation((int) (11*screenSize.getHeight()/20));
+        cont.add(text);
+
+        /*<------------ GAME ------------>*/
         Adunami display = new Adunami();
         right.add(display, BorderLayout.SOUTH);
 
@@ -64,27 +64,27 @@ public class IDE {
             }
         });
 
-        // terminal
-        JPanel terminal = new JPanel(new BorderLayout());
+        /*<------------ QUOTE ------------>*/
+        Quotes quote = new Quotes();
+        right.add(quote);
 
-        JLabel terminalLabel = new JLabel("Output");
-        terminalLabel.setFont(Fonts.getRegular());
-        terminalLabel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
-        terminal.add(terminalLabel, BorderLayout.NORTH);
+        cont.add(right, BorderLayout.EAST);
+        pane.add(cont);
 
-        TerminalArea term = new TerminalArea();
-        terminal.add(new JScrollPane(term));
-        right.add(terminal);
-        
-        text.add(right, BorderLayout.EAST);
-        pane.add(text);
+        /*<------------ TOPBAR ------------>*/
+        TopbarPanel bar = new TopbarPanel(code);
+        pane.add(bar, BorderLayout.PAGE_START);
+
+        // Register topbarPanel as a listener for file changes
+        fileHandler.setFileChangeListener(bar);
+
         frame.add(pane);
 
-        // navbar
+        /*<------------ NAVBAR ------------>*/
         NavbarPanel nav = new NavbarPanel(code, undoManager);
         frame.add(nav, BorderLayout.WEST);
 
-        // custom close function
+        // display the window
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -92,7 +92,6 @@ public class IDE {
             }
         });
 
-        // display the window
         frame.setLocationRelativeTo(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.pack();
@@ -119,9 +118,9 @@ public class IDE {
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
         
-        SplashScreen sp = new SplashScreen();
+        // SplashScreen sp = new SplashScreen();
         
-        if(!sp.isVisible())
+        // if(!sp.isVisible())
             createWindow();
     }
 }

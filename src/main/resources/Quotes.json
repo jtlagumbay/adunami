@@ -1,0 +1,346 @@
+[
+    {
+        "text": "When you have a dream, you have got to grab it and never let go.",
+        "author": "Carol Burnett"
+    },
+    {
+        "text": "You can observe a lot just by watching.",
+        "author": "Yogi Berra"
+    },
+    {
+        "text": "A house divided against itself cannot stand.",
+        "author": "Abraham Lincoln"
+    },
+    {
+        "text": "Difficulties increase the nearer we get to the goal.",
+        "author": "Johann Wolfgang von Goethe"
+    },
+    {
+        "text": "Fate is in your hands and no one elses",
+        "author": "Byron Pulsifer"
+    },
+    {
+        "text": "Be the chief but never the lord.",
+        "author": "Lao Tzu"
+    },
+    {
+        "text": "Nothing happens unless first we dream.",
+        "author": "Carl Sandburg"
+    },
+    {
+        "text": "Well begun is half done.",
+        "author": "Aristotle"
+    },
+    {
+        "text": "Life is a learning experience, only if you learn.",
+        "author": "Yogi Berra"
+    },
+    {
+        "text": "Self-complacency is fatal to progress.",
+        "author": "Margaret Sangster"
+    },
+    {
+        "text": "Peace comes from within. Do not seek it without.",
+        "author": "Buddha"
+    },
+    {
+        "text": "What you give is what you get.",
+        "author": "Byron Pulsifer"
+    },
+    {
+        "text": "We can only learn to love by loving.",
+        "author": "Iris Murdoch"
+    },
+    {
+        "text": "Life is change. Growth is optional. Choose wisely.",
+        "author": "Karen Clark"
+    },
+    {
+        "text": "You will see it when you believe it.",
+        "author": "Wayne Dyer"
+    },
+    {
+        "text": "Today is the tomorrow we worried about yesterday.",
+        "author": "Unknown"
+    },
+    {
+        "text": "Nothing is impossible. The word itself says I am possible!",
+        "author": "Audrey Hepburn"
+    },
+    {
+        "text": "There is nothing impossible to they who will try.",
+        "author": "Alexander the Great"
+    },
+    {
+        "text": "The bad news is time flies. The good news is you are the pilot.",
+        "author": "Michael Altshuler"
+    },
+    {
+        "text": "Life has got all those twists and turns. You have got to hold on tight and off you go.",
+        "author": "Nicole Kidman"
+    },
+    {
+        "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+        "author": "Winston Churchill"
+    },
+    {
+        "text": "You define your own life. Do not let other people write your script.",
+        "author": "Oprah Winfrey"
+    },
+    {
+        "text": "You are never too old to set another goal or to dream a new dream.",
+        "author": "Malala Yousafzai"
+    },
+    {
+        "text": "Code is like humor. When you have to explain it, it is bad.",
+        "author": "Cory House"
+    },
+    {
+        "text": "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
+        "author": "Antoine de Saint-Exupery"
+    },
+    {
+        "text": "It is not at all important to get it right the first time. It is vitally important to get it right the last time.",
+        "author": "Andrew Hunt"
+    },
+    {
+        "text": "The best way to predict the future is to implement it.",
+        "author": "David Heinemeier Hansson"
+    },
+    {
+        "text": "The most important property of a program is whether it accomplishes the intention of its user.",
+        "author": "C.A.R. Hoare"
+    },
+    {
+        "text": "First, solve the problem. Then, write the code.",
+        "author": "John Johnson"
+    },
+    {
+        "text": "Code tells you how, comments should tell you why.",
+        "author": "Jeff Atwood"
+    },
+    {
+        "text": "To understand a program you must become both the machine and the program.",
+        "author": "Alan J. Perlis"
+    },
+    {
+        "text": "If debugging is the process of removing software bugs, then programming must be the process of putting them in.",
+        "author": "Edsger W. Dijkstra"
+    },
+    {
+        "text": "Programming is not about what you know; it is about what you can figure out.",
+        "author": "Chris Pine"
+    },
+    {
+        "text": "If you automate a mess, you get an automated mess.",
+        "author": "Rod Michael"
+    },
+    {
+        "text": "The function of good software is to make the complex appear to be simple.",
+        "author": "Grady Booch"
+    },
+    {
+        "text": "A good programmer is someone who always looks both ways before crossing a one-way street.",
+        "author": "Doug Linder"
+    },
+    {
+        "text": "The best software is easy to understand and easy to change.",
+        "author": "Ward Cunningham"
+    },
+    {
+        "text": "Testing leads to failure, and failure leads to understanding.",
+        "author": "Burt Rutan"
+    },
+    {
+        "text": "The most important single aspect of software development is to be clear about what you are trying to build.",
+        "author": "Bjarne Stroustrup"
+    },
+    {
+        "text": "Writing code is like writing poetry.",
+        "author": "Anonymous"
+    },
+    {
+        "text": "You might not think that programmers are artists, but programming is an extremely creative profession. It is logic-based creativity.",
+        "author": "John Romero"
+    },
+    {
+        "text": "It is not that I am so smart, it is just that I stay with problems longer.",
+        "author": "Albert Einstein"
+    },
+    {
+        "text": "When in doubt, use brute force.",
+        "author": "Ken Thompson"
+    },
+    {
+        "text": "Software and cathedrals are much the same. First we build them, then we pray.",
+        "author": "Sam Redwine"
+    },
+    {
+        "text": "Perseverance is not a long race; it is many short races one after the other.",
+        "author": "Walter Elliot"
+    },
+    {
+        "text": "Programming is not about typing; it is about thinking.",
+        "author": "Rich Hickey"
+    },
+    {
+        "text": "Code refactoring and optimization are like going to the gym. It is painful while you do it, but you feel great afterwards.",
+        "author": "Unknown"
+    },
+    {
+        "text": "To understand recursion, one must first understand recursion.",
+        "author": "Unknown"
+    },
+    {
+        "text": "Debugging is like being the detective in a crime movie where you are also the murderer.",
+        "author": "Filipe Fortes"
+    },
+    {
+        "text": "If at first, you do not succeed, call it version 1.0.",
+        "author": "Unknown"
+    },
+    {
+        "text": "It is not a bug, it is a feature.",
+        "author": "Unknown"
+    },
+    {
+        "text": "Real programmers count from 0.",
+        "author": "Unknown"
+    },
+    {
+        "text": "Simplicity is the soul of efficiency.",
+        "author": "Austin Freeman"
+    },
+    {
+        "text": "Believe you can, and you are halfway there.",
+        "author": "Theodore Roosevelt"
+    },
+    {
+        "text": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+    },
+    {
+        "text": "Do not watch the clock; do what it does. Keep going.",
+        "author": "Sam Levenson"
+    },
+    {
+        "text": "The only limit to our realization of tomorrow will be our doubts of today.",
+        "author": "Franklin D. Roosevelt"
+    },
+    {
+        "text": "It does not matter how slowly you go as long as you do not stop.",
+        "author": "Confucius"
+    },
+    {
+        "text": "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
+        "author": "Christian D. Larson"
+    },
+    {
+        "text": "Do not be pushed around by the fears in your mind. Be led by the dreams in your heart.",
+        "author": "Roy T. Bennett"
+    },
+    {
+        "text": "Success usually comes to those who are too busy to be looking for it.",
+        "author": "Henry David Thoreau"
+    },
+    {
+        "text": "The road to success and the road to failure are almost exactly the same.",
+        "author": "Colin R. Davis"
+    },
+    {
+        "text": "In the middle of every difficulty lies opportunity.",
+        "author": "Albert Einstein"
+    },
+    {
+        "text": "It is not whether you get knocked down, it is whether you get up.",
+        "author": "Vince Lombardi"
+    },
+    {
+        "text": "The only thing standing between you and your goal is the story you keep telling yourself as to why you ca not achieve it.",
+        "author": "Jordan Belfort"
+    },
+    {
+        "text": "The future depends on what you do today.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "text": "Success is not in what you have, but who you are.",
+        "author": "Bo Bennett"
+    },
+    {
+        "text": "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+        "author": "Ralph Waldo Emerson"
+    },
+    {
+        "text": "The way to get started is to quit talking and begin doing.",
+        "author": "Walt Disney"
+    },
+    {
+        "text": "It is hard to beat a person who never gives up.",
+        "author": "Babe Ruth"
+    },
+    {
+        "text": "You are never too old to set another goal or to dream a new dream.",
+        "author": "C.S. Lewis"
+    },
+    {
+        "text": "It always seems impossible until it is done.",
+        "author": "Nelson Mandela"
+    },
+    {
+        "text": "The best revenge is massive success.",
+        "author": "Frank Sinatra"
+    },
+    {
+        "text": "I ca not change the direction of the wind, but I can adjust my sails to always reach my destination.",
+        "author": "Jimmy Dean"
+    },
+    {
+        "text": "Dream big and dare to fail.",
+        "author": "Norman Vaughan"
+    },
+    {
+        "text": "To succeed in life, you need two things: ignorance and confidence.",
+        "author": "Mark Twain"
+    },
+    {
+        "text": "Life is really simple, but we insist on making it complicated.",
+        "author": "Confucius"
+    },
+    {
+        "text": "But the Lord stood with me and gave me strength.",
+        "author": "2 Timothy 4:17"
+    },
+    {
+        "text": "The Lord is close to the brokenhearted and saves those who are crushed in spirit.",
+        "author": "Psalm 34:18"
+    },
+    {
+        "text": "For I am not ashamed of the gospel, because it is the power of God that brings salvation to everyone who believes.",
+        "author": "Romans 1:16"
+    },
+    {
+        "text": "I have set the Lord always before me; because he is at my right hand, I shall not be shaken.",
+        "author": "Psalm 16:8"
+    },
+    {
+        "text": "But let justice roll down like waters, and righteousness like an ever-flowing stream.",
+        "author": "Amos 5:24"
+    },
+    {
+        "text": "Rejoice always, pray without ceasing, give thanks in all circumstances; for this is the will of God in Christ Jesus for you.",
+        "author": "1 Thessalonians 5:16-18"
+    },
+    {
+        "text": "The righteous cry out, and the Lord hears them; he delivers them from all their troubles.",
+        "author": "Psalm 34:17"
+    },
+    {
+        "text": "Give thanks to the Lord, for he is good; his love endures forever.",
+        "author": "1 Chronicles 16:34"
+    },
+    {
+        "text": "For God did not send his Son into the world to condemn the world, but to save the world through him.",
+        "author": "John 3:17"
+    }
+]

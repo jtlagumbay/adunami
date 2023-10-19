@@ -107,7 +107,7 @@ public class Adunami extends JPanel implements ActionListener {
             timer.stop();
 
             if(button == false) {
-                String msg = "Game Paused. Click here to play.";
+                String msg = "Bored? Play the snake game!";
                 FontMetrics metr = getFontMetrics(Fonts.getRegular());
                 g.setColor(Color.WHITE);
                 g.setFont(Fonts.getRegular());
