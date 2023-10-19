@@ -29,7 +29,7 @@ public class Adunami extends JPanel implements ActionListener {
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = (B_WIDTH * B_HEIGHT) / (DOT_SIZE * DOT_SIZE);
     private final int RAND_POS = 20;
-    private final int DELAY = 200;
+    private final int DELAY = 150;
 
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];

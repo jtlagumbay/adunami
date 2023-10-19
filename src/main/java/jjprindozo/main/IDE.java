@@ -7,7 +7,6 @@ import javax.swing.undo.UndoManager;
 
 import jjprindozo.buttons.navbar.SaveButton;
 import jjprindozo.common.Fonts;
-import jjprindozo.splash.SplashScreen;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
