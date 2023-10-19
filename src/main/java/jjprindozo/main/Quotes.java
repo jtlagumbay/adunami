@@ -24,7 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import jjprindozo.common.Colors;
 import jjprindozo.common.Fonts;
 
 public class Quotes extends JPanel {
@@ -35,11 +34,9 @@ public class Quotes extends JPanel {
     private JTextArea auth;
 
     public Quotes() {
-        setBackground(Colors.LIGHTGRAY);
         setLayout(new BorderLayout());
         JPanel top = new JPanel(new BorderLayout());
-        top.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
-        
+        top.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         // read JSON file
         readJSON();
 
@@ -69,21 +66,21 @@ public class Quotes extends JPanel {
 
     private JPanel generateQuote() {
         JPanel quoteContainer = new JPanel(new BorderLayout());
-
+        
         msg = new JTextArea();
-        msg.setFont(Fonts.getRegular(18f));
+        msg.setFont(Fonts.getRegular(22f));
         msg.setEditable(false);
         msg.setWrapStyleWord(true);
         msg.setLineWrap(true);
-        msg.setBorder(BorderFactory.createEmptyBorder(70, 20, 0, 20));
+        msg.setBorder(BorderFactory.createEmptyBorder(50, 20, 0, 20));
         quoteContainer.add(msg, BorderLayout.CENTER);
         
         auth = new JTextArea();
-        auth.setFont(Fonts.getRegular(18f));
+        auth.setFont(Fonts.getRegular(20f));
         auth.setEditable(false);
         auth.setWrapStyleWord(true);
         auth.setLineWrap(true);
-        auth.setBorder(BorderFactory.createEmptyBorder(0, 20, 70, 20));
+        auth.setBorder(BorderFactory.createEmptyBorder(0, 20, 60, 20));
         quoteContainer.add(auth, BorderLayout.SOUTH);
 
         updateQuoteText();
