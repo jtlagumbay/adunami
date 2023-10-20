@@ -39,11 +39,11 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         buttons.setBackground(Colors.GREEN);
 
         /** <-------  COMPILE  -------> **/
-        CompileButton compile = new CompileButton();
+        CompileButton compile = new CompileButton(textArea);
         buttons.add(compile);
 
         /** <-------  RUN  -------> **/
-        RunButton run = new RunButton();
+        RunButton run = new RunButton(textArea);
         buttons.add(run);
 
         add(buttons, BorderLayout.EAST);

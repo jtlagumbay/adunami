@@ -1,8 +1,11 @@
 package jjprindozo.buttons.topbar;
 
 import java.awt.event.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.AbstractAction;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import jjprindozo.common.GlobalVar;
@@ -19,7 +22,7 @@ public class RunButton extends TopbarButtonTheme {
       }
   }
 
-  public RunButton() {
+  public RunButton(JTextArea textArea) {
     super(
       GlobalVar.IMAGE_PATH+"run.png", 
       "Run", 
@@ -32,6 +35,17 @@ public class RunButton extends TopbarButtonTheme {
         },
         "runAction"
     );
+
+    Timer timer = new Timer(true);
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            if(textArea.getText().trim().isEmpty())
+              setEnabled(false);
+            else
+              setEnabled(true);
+        }
+    }, 0, 100);
  
   }
 }

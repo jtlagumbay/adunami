@@ -4,14 +4,13 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.awt.image.ImageProducer;
 import java.net.URL;
 
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JToolTip;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 import jjprindozo.root;
 import jjprindozo.common.Colors;
@@ -56,6 +55,15 @@ public class TopbarButtonTheme extends JButton {
       } else {
         g.setColor(getBackground());
       }
+
+      Image originalImage = ((ImageIcon) getIcon()).getImage();
+      ImageFilter filter = new GrayFilter(true, 60); // 50 is the level of grayscale
+      ImageProducer producer = new FilteredImageSource(originalImage.getSource(), filter);
+      Image grayImage = Toolkit.getDefaultToolkit().createImage(producer);
+
+      Icon grayedOutIcon = new ImageIcon(grayImage);
+      setDisabledIcon(grayedOutIcon);
+
       g.fillRect(0, 0, getWidth(), getHeight());
       super.paintComponent(g);
     }

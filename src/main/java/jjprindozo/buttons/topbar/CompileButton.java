@@ -1,6 +1,8 @@
 package jjprindozo.buttons.topbar;
 
 import java.awt.event.*;
+import java.util.*;
+import java.util.Timer;
 
 import javax.swing.*;
 
@@ -18,7 +20,7 @@ public class CompileButton extends TopbarButtonTheme {
       }
   }
 
-  public CompileButton() {
+  public CompileButton(JTextArea textArea) {
     super(
       GlobalVar.IMAGE_PATH+"compile.png",
       "Compile",
@@ -31,6 +33,16 @@ public class CompileButton extends TopbarButtonTheme {
         },
         "runAction"
     );
-  
+
+    Timer timer = new Timer(true);
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            if(textArea.getText().trim().isEmpty())
+              setEnabled(false);
+            else
+              setEnabled(true);
+        }
+    }, 0, 100);
   }
 }
