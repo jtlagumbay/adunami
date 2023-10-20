@@ -7,8 +7,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
-import javax.swing.event.UndoableEditEvent;
-import javax.swing.event.UndoableEditListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.undo.UndoManager;
 
 public class UndoButton extends NavbarButtonTheme {
@@ -34,18 +34,44 @@ public class UndoButton extends NavbarButtonTheme {
             undoText(undoManager);
           }
         },
-        "undoAction"
-    );
-      setEnabled(false);
-      textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
-          @Override
-          public void undoableEditHappened(UndoableEditEvent e) {
-              setEnabled(true); // Store the edit in the UndoManager
+        "undoAction");
+    setEnabled(false);
+
+ 
+      textArea.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+          if (undoManager.canUndo()) {
+            setEnabled(true);
           }
-      });
+          else{
+            setEnabled(false);
+          }
+            
+        }
 
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+                if (undoManager.canUndo()) {
+            setEnabled(true);
+          }
+          else{
+            setEnabled(false);
+          }
+        }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (undoManager.canUndo()) {
+              setEnabled(true);
+            }
+            else{
+              setEnabled(false);
+            }
+            }
+        });
   }
-
+  
   private static void undoText(UndoManager undoManager) {
     try {
       if(undoManager.canUndo()) {
