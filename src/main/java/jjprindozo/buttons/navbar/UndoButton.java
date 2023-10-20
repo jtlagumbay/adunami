@@ -1,28 +1,26 @@
 package jjprindozo.buttons.navbar;
 
 import jjprindozo.common.GlobalVar;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 
 public class UndoButton extends NavbarButtonTheme {
   private static KeyStroke ctrlZKeyStroke;
   static {
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-          // On macOS, use Command + Z
-          ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.META_DOWN_MASK);
-      } else {
-          // On other platforms, use Ctrl + Z
-          ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK);
-      }
+      // On macOS, use Command + Z
+      ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.META_DOWN_MASK);
+    } else {
+      // On other platforms, use Ctrl + Z
+      ctrlZKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK);
+    }
   }
 
   public UndoButton(UndoManager undoManager, JTextArea textArea) {
@@ -37,18 +35,14 @@ public class UndoButton extends NavbarButtonTheme {
           }
         },
         "undoAction"
-      );
-
-      Timer timer = new Timer(true);
-      timer.scheduleAtFixedRate(new TimerTask() {
+    );
+      setEnabled(false);
+      textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
           @Override
-          public void run() {
-              if(textArea.getText().trim().isEmpty())
-                setEnabled(false);
-              else
-                setEnabled(true);
+          public void undoableEditHappened(UndoableEditEvent e) {
+              setEnabled(true); // Store the edit in the UndoManager
           }
-      }, 0, 100);
+      });
 
   }
 

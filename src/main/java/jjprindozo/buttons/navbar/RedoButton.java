@@ -4,12 +4,11 @@ import jjprindozo.common.GlobalVar;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 
 public class RedoButton extends NavbarButtonTheme {
@@ -38,16 +37,13 @@ public class RedoButton extends NavbarButtonTheme {
         "redoAction"
     );
 
-      Timer timer = new Timer(true);
-      timer.scheduleAtFixedRate(new TimerTask() {
+      setEnabled(false);
+      textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
           @Override
-          public void run() {
-              if(textArea.getText().trim().isEmpty())
-                setEnabled(false);
-              else
-                setEnabled(true);
+          public void undoableEditHappened(UndoableEditEvent e) {
+              setEnabled(true); // Store the edit in the UndoManager
           }
-      }, 0, 100);
+      });
  
     }
 
