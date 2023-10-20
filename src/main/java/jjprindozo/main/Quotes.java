@@ -92,7 +92,8 @@ public class Quotes extends JPanel {
         String message = "'" + randomQuote[0] + "'";
         String author = "- " + randomQuote[1];
     
-        msg.setText(message);
+        TypeWriterEffect messageAnimation = new TypeWriterEffect(msg, message);
+        messageAnimation.start();
         auth.setText(author);
     }
 
