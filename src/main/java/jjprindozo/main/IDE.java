@@ -118,9 +118,9 @@ public class IDE {
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
         
-        // SplashScreen sp = new SplashScreen();
+        SplashScreen sp = new SplashScreen();
         
-        // if(!sp.isVisible())
+        if(!sp.isVisible())
             createWindow();
     }
 }
