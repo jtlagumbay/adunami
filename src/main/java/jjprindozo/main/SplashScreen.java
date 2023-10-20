@@ -71,7 +71,7 @@ public class SplashScreen extends JFrame {
         
         try{
             for(int i = 0; i <= 100; i++){
-                Thread.sleep(50);
+                Thread.sleep(30);
                 loadingValue.setText(i + "%");
                 
                 switch (i) {
