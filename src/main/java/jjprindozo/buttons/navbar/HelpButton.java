@@ -16,6 +16,13 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.JEditorPane;
+import javax.swing.JScrollPane;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -59,6 +66,7 @@ public class HelpButton extends NavbarButtonTheme {
     private static void showHelp() {
         // Create a JFrame to display the help information
         JFrame helpFrame = new JFrame();
+        helpFrame.getContentPane().setBackground(new Color(60, 63, 65));
         ImageIcon img = new ImageIcon("src/main/resources/images/logo.png");
         helpFrame.setIconImage(img.getImage());
         // helpFrame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
@@ -76,29 +84,49 @@ public class HelpButton extends NavbarButtonTheme {
         // String helpInfo = "Welcome to adunami IDE!\n\n"
         //                 + "This is the first ever IDE that has snake game on the lower right side to help you relieve your stress while coding and motivational quotes panel on the upper right side to guide and motivate you until you finish coding. Happy coding!\n";
         // helpText.setText(helpInfo);
-        
 
-// Create a top container for the upper part
-JTextArea topTextArea = new JTextArea("Welcome to adunami IDE!\n\n");
-topTextArea.setFont(new Font("Jost", Font.BOLD, 14)); // Set font to bold
-topTextArea.setForeground(new Color(255, 255, 255)); // Set color to #FFFFFF
+    // Create a top container for the upper part
+    String htmlCode = 
+"<html>" +
+"<body style='text-align: justify;'>" +
+        "<p><b><font color='#FFFFFF'>Welcome to adunami IDE!</font></b></p>" +
+        "<p><font color='#FFFFFF'>This is the first ever IDE that has a" +
+        "<b style='color:#68FFDC;'> snake game</b> on the lower right side to help you relieve your stress while coding and a" +
+        "<b style='color:#68FFDC;'> motivational quotes</b> panel on the upper right side to guide and motivate you until you finish coding. Happy coding!</font></p>" +
+    "</body>" +
+"</html>";
+
+JEditorPane topTextArea = new JEditorPane();
+topTextArea.setContentType("text/html");
+HTMLEditorKit htmlEditor = new HTMLEditorKit();
+topTextArea.setEditorKit(htmlEditor); // Set HTML editor kit
+Document doc = topTextArea.getDocument();
+try {
+    htmlEditor.insertHTML((HTMLDocument) doc, doc.getLength(), htmlCode, 0, 0, null);
+}catch(Exception e){}
+
 topTextArea.setEditable(false);
-topTextArea.setLineWrap(true);
-topTextArea.setWrapStyleWord(true);
+topTextArea.setOpaque(false); // Make the background transparent
+//JScrollPane scrollPane = new JScrollPane(topTextArea);
+
+// Optional: Set a preferred size for the scroll pane
+//scrollPane.setPreferredSize(new Dimension(400, 200));
+
+
+//Create a top container for the upper part
+//JTextArea topTextArea = new JTextArea("Welcome to adunami IDE!\n\n");
+//topTextArea.setFont(new Font("Jost", Font.BOLD, 14)); // Set font to bold
+//topTextArea.setForeground(new Color(255, 255, 255)); // Set color to #FFFFFF
+//topTextArea.setEditable(false);
+//topTextArea.setLineWrap(true);
+//topTextArea.setWrapStyleWord(true);
 
 // Create a top container for the upper part paragraph
-JTextArea topTextArea2 = new JTextArea("This is the first ever IDE that has a ");
-topTextArea2.setForeground(new Color(255, 255, 255)); // Set color to #FFFFFF
+//JTextArea topTextArea2 = new JTextArea("This is the first ever IDE that has a ");
+//topTextArea2.setForeground(new Color(255, 255, 255)); // Set color to #FFFFFF
 //topTextArea2.setEditable(false);
 //topTextArea2.setLineWrap(true);
 //topTextArea2.setWrapStyleWord(true);
-
-//snake game on the lower right side to help you relieve your stress while coding and a motivational quotes panel on the upper right side to guide and motivate you until you finish coding. Happy coding!\n");
-    //topTextArea.setEditable(false);
-    //topTextArea.setLineWrap(true);
-    //topTextArea.setWrapStyleWord(true);
-
-
 
 // Create a JPanel for the bottom part, which contains two containers
 JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
