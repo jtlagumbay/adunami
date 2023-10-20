@@ -2,7 +2,10 @@ package jjprindozo.buttons.navbar;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 
@@ -19,7 +22,7 @@ public class CopyButton extends NavbarButtonTheme{
           ctrlCKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK);
       }
   }
-  public CopyButton() {
+  public CopyButton(JTextArea textArea) {
     super(
         GlobalVar.IMAGE_PATH + "copy_icon.png",
         "Copy",
@@ -28,7 +31,16 @@ public class CopyButton extends NavbarButtonTheme{
         "copyAction"
       );
 
- 
+    Timer timer = new Timer(true);
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            if(textArea.getText().trim().isEmpty())
+              setEnabled(false);
+            else
+              setEnabled(true);
+        }
+    }, 0, 100);
     }
   
 }

@@ -10,4 +10,5 @@ public class Colors {
   public static final Color DARKGREENHOVER = Color.decode("#6D7771");
   public static final Color WHITE = Color.decode("#FFFFFF");
   public static final Color BLACK = Color.decode("#000000");
+  public static final Color GRAY = Color.decode("#3C3F41");
 }

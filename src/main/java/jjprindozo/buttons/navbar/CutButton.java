@@ -2,7 +2,10 @@ package jjprindozo.buttons.navbar;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 
@@ -19,7 +22,7 @@ public class CutButton extends NavbarButtonTheme{
           ctrlXKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK);
       }
   }
-  public CutButton() {
+  public CutButton(JTextArea textArea) {
     super(
         GlobalVar.IMAGE_PATH + "cut_icon.png",
         "Cut",
@@ -28,7 +31,16 @@ public class CutButton extends NavbarButtonTheme{
         "cutAction"
       );
 
- 
+      Timer timer = new Timer(true);
+      timer.scheduleAtFixedRate(new TimerTask() {
+          @Override
+          public void run() {
+              if(textArea.getText().trim().isEmpty())
+                setEnabled(false);
+              else
+                setEnabled(true);
+          }
+      }, 0, 100);
     }
   
 }

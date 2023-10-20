@@ -41,19 +41,19 @@ public class NavbarPanel extends JPanel {
       add(saveAs);
 
       /** <-------  UNDO FUNCTION  -------> **/
-      UndoButton undo = new UndoButton(undoManager);
+      UndoButton undo = new UndoButton(undoManager, textArea);
       add(undo);
       
       /** <-------  REDO FUNCTION  -------> **/
-      RedoButton redo = new RedoButton(undoManager);
+      RedoButton redo = new RedoButton(undoManager, textArea);
       add(redo);
       
       /** <-------  CUT FUNCTION  -------> **/
-      CutButton cut = new CutButton();
+      CutButton cut = new CutButton(textArea);
       add(cut);
       
       /** <-------  COPY FUNCTION  -------> **/
-      CopyButton copy = new CopyButton();
+      CopyButton copy = new CopyButton(textArea);
       add(copy);
 
       /** <-------  PASTE FUNCTION  -------> **/
