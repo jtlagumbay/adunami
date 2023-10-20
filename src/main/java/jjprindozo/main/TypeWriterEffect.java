@@ -19,7 +19,6 @@ public class TypeWriterEffect {
             public void actionPerformed(ActionEvent e) {
                 if (characterIndex < input.length()) {
                     textArea.append(Character.toString(input.charAt(characterIndex)));
-                    System.out.print(characterIndex + " ");
                     characterIndex++;
                 } else {
                     stop();
