@@ -72,7 +72,7 @@ public class Quotes extends JPanel {
         msg.setEditable(false);
         msg.setWrapStyleWord(true);
         msg.setLineWrap(true);
-        msg.setBorder(BorderFactory.createEmptyBorder(50, 20, 0, 20));
+        msg.setBorder(BorderFactory.createEmptyBorder(40, 20, 0, 20));
         quoteContainer.add(msg, BorderLayout.CENTER);
         
         auth = new JTextArea();
