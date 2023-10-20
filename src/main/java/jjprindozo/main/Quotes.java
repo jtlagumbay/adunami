@@ -32,6 +32,7 @@ public class Quotes extends JPanel {
     private String randomQuote[] = {"Be motivated. Click generate.", "adunami Team"};
     private JTextArea msg;
     private JTextArea auth;
+    TypeWriterEffect messageAnimation;
 
     public Quotes() {
         setLayout(new BorderLayout());
@@ -68,6 +69,7 @@ public class Quotes extends JPanel {
         JPanel quoteContainer = new JPanel(new BorderLayout());
         
         msg = new JTextArea();
+        messageAnimation = new TypeWriterEffect(msg);
         msg.setFont(Fonts.getRegular(22f));
         msg.setEditable(false);
         msg.setWrapStyleWord(true);
@@ -92,7 +94,8 @@ public class Quotes extends JPanel {
         String message = "'" + randomQuote[0] + "'";
         String author = "- " + randomQuote[1];
     
-        TypeWriterEffect messageAnimation = new TypeWriterEffect(msg, message);
+        messageAnimation.stop();
+        messageAnimation.setText(message);
         messageAnimation.start();
         auth.setText(author);
     }
