@@ -77,12 +77,12 @@ int main() {
 
     Scanner m_scanner(file_name);
     vector<vector<TokenInfo>> tokens = m_scanner.start();
-    m_scanner.printTokenList(); // comment later on
+    // m_scanner.printTokenList(); // comment later on
 
     Parser m_parser(tokens, file_name);
     m_parser.start();
 
-    m_parser.printSymbolTable(); // comment later on
+    // m_parser.printSymbolTable(); // comment later on
     m_parser.generateAsm();
     // run asm
     
