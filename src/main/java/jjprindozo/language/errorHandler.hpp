@@ -21,7 +21,7 @@ const char* ErrorCodeToString(ErrorCode t) {
         case REFERENCE: return "REFERENCE";
         case RUNTIME: return "RUNTIME";
         case INPUT_OUTPUT: return "INPUT_OUTPUT";
-        default: "ErrorCodeToString ERROR";
+        default: return "ErrorCodeToString ERROR";
     }
 }
 
