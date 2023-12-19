@@ -40,8 +40,6 @@ public class RunButton extends TopbarButtonTheme {
             Terminal.executeCommand("g++ parser.cpp -o parser");
             Terminal.executeCommand("parser.exe");
             Terminal.executeCommand(file_name);
-            Terminal.executeCommand("cd " + GlobalVar.IDE_PATH);
-            Terminal.executeCommand("DONE");
           }
         },
         "runAction"

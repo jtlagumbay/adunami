@@ -66,10 +66,9 @@ public class TerminalArea extends JPanel {
 
     public void executeCommand(String command) {
         try {
-            if(command == "DONE") {
-                cmdProcess.getOutputStream().write(("^C" + "\n").getBytes());
-                cmdProcess.getOutputStream().flush();
-            } else {
+            if(command == "clear")
+                SwingUtilities.invokeLater(() -> outputTextArea.setText(""));
+            else {
                 cmdProcess.getOutputStream().write((command + "\n").getBytes());
                 cmdProcess.getOutputStream().flush();
             }

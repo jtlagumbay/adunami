@@ -36,8 +36,6 @@ public class CompileButton extends TopbarButtonTheme {
             
             Terminal.executeCommand("cd " + GlobalVar.LANGUAGE_PATH);
             Terminal.executeCommand("g++ parser.cpp -o parser");
-            Terminal.executeCommand("cd " + GlobalVar.IDE_PATH);
-            Terminal.executeCommand("DONE");
           }
         },
         "runAction"
