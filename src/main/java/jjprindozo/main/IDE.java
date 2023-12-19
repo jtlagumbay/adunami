@@ -46,7 +46,7 @@ public class IDE {
         terminal.add(terminalLabel, BorderLayout.NORTH);
 
         TerminalArea term = new TerminalArea();
-        terminal.add(new JScrollPane(term));
+        terminal.add(term);
         
 
         JSplitPane text = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(code), terminal); // textarea && terminal
@@ -72,7 +72,7 @@ public class IDE {
         pane.add(cont);
 
         /*<------------ TOPBAR ------------>*/
-        TopbarPanel bar = new TopbarPanel(code);
+        TopbarPanel bar = new TopbarPanel(code, term);
         pane.add(bar, BorderLayout.PAGE_START);
 
         // Register topbarPanel as a listener for file changes

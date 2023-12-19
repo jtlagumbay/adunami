@@ -2,66 +2,84 @@ package jjprindozo.main;
 
 import javax.swing.*;
 
-import jjprindozo.common.Colors;
-
 import java.awt.*;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class TerminalArea extends JTextArea {
+public class TerminalArea extends JPanel {
+    private JTextArea outputTextArea;
+    private JTextField inputTextField;
+    private Process cmdProcess;
+
     public TerminalArea() {
-        initialize();
+        setLayout(new BorderLayout());
+
+        outputTextArea = new JTextArea();
+        outputTextArea.setEditable(false);
+        outputTextArea.setBackground(Color.BLACK);
+        outputTextArea.setForeground(Color.WHITE);
+
+        inputTextField = new JTextField();
+        inputTextField.addActionListener(e -> {
+            executeCommand(inputTextField.getText());
+            inputTextField.setText("");
+        });
+
+        JScrollPane scrollPane = new JScrollPane(outputTextArea);
+
+        add(scrollPane, BorderLayout.CENTER);
+        add(inputTextField, BorderLayout.SOUTH);
+
+        startCmdProcess();
     }
 
-    private void initialize() {
-        setBackground(Colors.BLACK);
-        setForeground(Colors.WHITE);
-        setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
-        setEditable(true);  // Allow user input
-        setMargin(new Insets(0, 40, 0, 0));
+    private void startCmdProcess() {
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd");
+            processBuilder.redirectErrorStream(true);
+            cmdProcess = processBuilder.start();
 
-        // Create a custom OutputStream to redirect System.out
-        OutputStream outputStream = new OutputStream() {
-            @Override
-            public void write(int b) {
-                // Append the output to the JTextArea
-                append(String.valueOf((char) b));
-            }
-        };
-        
-        // Set the custom OutputStream as the new System.out
-        System.setOut(new PrintStream(outputStream, true));
+            // Read the output of CMD in a separate thread
+            new Thread(() -> {
+                try {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(cmdProcess.getInputStream()));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        appendToOutput(line + "\n");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
 
-        updateLineNumbers();
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        drawLineNumbers(g);
-    }
-
-    private void drawLineNumbers(Graphics g) {
-        FontMetrics fontMetrics = g.getFontMetrics();
-        Insets insets = getInsets();
-        int lineHeight = fontMetrics.getHeight();
-        int startY = insets.top + fontMetrics.getAscent();
-
-        int lineCount = getLineCount();
-
-        for (int i = 0; i < lineCount; i++) {
-            g.drawString(">", 5, startY);
-            startY += lineHeight;
+            // Close the process when the window is closed
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                if (cmdProcess != null) {
+                    cmdProcess.destroy();
+                }
+            }));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void updateLineNumbers() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                repaint();
+    public void executeCommand(String command) {
+        try {
+            if(command == "DONE") {
+                cmdProcess.getOutputStream().write(("^C" + "\n").getBytes());
+                cmdProcess.getOutputStream().flush();
+            } else {
+                cmdProcess.getOutputStream().write((command + "\n").getBytes());
+                cmdProcess.getOutputStream().flush();
             }
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void appendToOutput(String text) {
+        SwingUtilities.invokeLater(() -> outputTextArea.append(text));
     }
 }
 

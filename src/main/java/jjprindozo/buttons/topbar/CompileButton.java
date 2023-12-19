@@ -1,10 +1,6 @@
 package jjprindozo.buttons.topbar;
 
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 import java.util.Timer;
 
@@ -12,6 +8,7 @@ import javax.swing.*;
 
 import jjprindozo.common.GlobalVar;
 import jjprindozo.files.FileHandler;
+import jjprindozo.main.TerminalArea;
 
 public class CompileButton extends TopbarButtonTheme {
   private static FileHandler fileHandler = FileHandler.getInstance();
@@ -26,7 +23,7 @@ public class CompileButton extends TopbarButtonTheme {
       }
   }
 
-  public CompileButton(JTextArea textArea) {
+  public CompileButton(JTextArea textArea, TerminalArea Terminal) {
     super(
       GlobalVar.IMAGE_PATH+"compile.png",
       "Compile",
@@ -34,8 +31,13 @@ public class CompileButton extends TopbarButtonTheme {
       new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            CompileLanguage();
-            // System.out.println("compile");
+            String file_name = fileHandler.getSelectedFile().getAbsolutePath();
+            file_name = file_name.replace(".adm", "");
+            
+            Terminal.executeCommand("cd " + GlobalVar.LANGUAGE_PATH);
+            Terminal.executeCommand("g++ parser.cpp -o parser");
+            Terminal.executeCommand("cd " + GlobalVar.IDE_PATH);
+            Terminal.executeCommand("DONE");
           }
         },
         "runAction"
@@ -51,39 +53,5 @@ public class CompileButton extends TopbarButtonTheme {
               setEnabled(true);
         }
     }, 0, 100);
-  }
-
-  private static void CompileLanguage() {
-    String parserPath = GlobalVar.LANGUAGE_PATH;
-    try {
-      // Compile command
-      String compileCommand = "g++ -o parser.exe parser.cpp";
-      String file_name = fileHandler.getSelectedFile().getAbsolutePath();
-      file_name = file_name.replace(".adm", "");
-      System.out.println("Compiling File: " + file_name + "\n\n");
-      File workingDirectory = new File(parserPath);
-  
-      // Create ProcessBuilder for compilation
-      ProcessBuilder compileProcessBuilder = new ProcessBuilder("cmd", "/c", compileCommand);
-      compileProcessBuilder.directory(workingDirectory);
-      compileProcessBuilder.redirectErrorStream(true); // Merge standard output and error streams
-  
-      // Start compilation process
-      Process compileProcess = compileProcessBuilder.start();
-  
-      // Get compilation output
-      BufferedReader compileOutput = new BufferedReader(new InputStreamReader(compileProcess.getInputStream()));
-      String line;
-      while ((line = compileOutput.readLine()) != null) {
-          System.out.println(line);
-      }
-  
-      // Wait for compilation to complete
-      int compileExitCode = compileProcess.waitFor();
-      System.out.println("Done Compilation with Exit Code: " + compileExitCode);
-  
-  } catch (IOException | InterruptedException e) {
-      e.printStackTrace();
-  }
   }
 }

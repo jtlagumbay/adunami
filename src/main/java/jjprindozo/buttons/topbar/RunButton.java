@@ -1,23 +1,20 @@
 package jjprindozo.buttons.topbar;
 
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import jjprindozo.common.GlobalVar;
 import jjprindozo.files.FileHandler;
+import jjprindozo.main.TerminalArea;
 
 public class RunButton extends TopbarButtonTheme {
   private static FileHandler fileHandler = FileHandler.getInstance();
   private static KeyStroke ctrlRKeyStroke;
+
   static {
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
           // On macOS, use Command + R
@@ -28,7 +25,7 @@ public class RunButton extends TopbarButtonTheme {
       }
   }
 
-  public RunButton(JTextArea textArea) {
+  public RunButton(JTextArea textArea, TerminalArea Terminal) {
     super(
       GlobalVar.IMAGE_PATH+"run.png", 
       "Run", 
@@ -36,9 +33,15 @@ public class RunButton extends TopbarButtonTheme {
       new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            // clearTerminal();
-            RunLanguage();
-            // System.out.println("run");
+            String file_name = fileHandler.getSelectedFile().getAbsolutePath();
+            file_name = file_name.replace(".adm", "");
+            
+            Terminal.executeCommand("cd " + GlobalVar.LANGUAGE_PATH);
+            Terminal.executeCommand("g++ parser.cpp -o parser");
+            Terminal.executeCommand("parser.exe");
+            Terminal.executeCommand(file_name);
+            Terminal.executeCommand("cd " + GlobalVar.IDE_PATH);
+            Terminal.executeCommand("DONE");
           }
         },
         "runAction"
@@ -55,62 +58,5 @@ public class RunButton extends TopbarButtonTheme {
         }
     }, 0, 100);
  
-  }
-
-  private static void RunLanguage() {
-    String parserPath = GlobalVar.LANGUAGE_PATH;
-    try {
-      // Compile command
-      String compileCommand = "g++ -o parser.exe parser.cpp";
-      String file_name = fileHandler.getSelectedFile().getAbsolutePath();
-      file_name = file_name.replace(".adm", "");
-      System.out.println("Running File: " + file_name + "\n\n");
-      File workingDirectory = new File(parserPath);
-  
-      // Create ProcessBuilder for compilation
-      ProcessBuilder compileProcessBuilder = new ProcessBuilder("cmd", "/c", compileCommand);
-      compileProcessBuilder.directory(workingDirectory);
-      compileProcessBuilder.redirectErrorStream(true); // Merge standard output and error streams
-  
-      // Start compilation process
-      Process compileProcess = compileProcessBuilder.start();
-  
-      // Get compilation output
-      BufferedReader compileOutput = new BufferedReader(new InputStreamReader(compileProcess.getInputStream()));
-      String line;
-      while ((line = compileOutput.readLine()) != null) {
-          System.out.println(line);
-      }
-  
-      // Wait for compilation to complete
-      int compileExitCode = compileProcess.waitFor();
-      System.out.println("Compilation Exit Code: " + compileExitCode);
-  
-      if (compileExitCode == 0) {
-          // Execution command with input redirection
-          String executionCommand = "echo " + file_name + " | parser.exe";
-  
-          // Create ProcessBuilder for execution
-          ProcessBuilder executionProcessBuilder = new ProcessBuilder("cmd", "/c", executionCommand);
-          executionProcessBuilder.directory(workingDirectory);
-          executionProcessBuilder.redirectErrorStream(true); // Merge standard output and error streams
-  
-          // Start execution process
-          Process executionProcess = executionProcessBuilder.start();
-  
-          // Get execution output
-          BufferedReader executionOutput = new BufferedReader(new InputStreamReader(executionProcess.getInputStream()));
-          while ((line = executionOutput.readLine()) != null) {
-              System.out.println(line);
-          }
-  
-          // Wait for execution to complete
-          int executionExitCode = executionProcess.waitFor();
-          System.out.println("Done Execution with Exit Code: " + executionExitCode);
-      }
-  
-    } catch (IOException | InterruptedException e) {
-        e.printStackTrace();
-    }
   }
 }

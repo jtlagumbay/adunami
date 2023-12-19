@@ -17,7 +17,7 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
     private static FileHandler fileHandler = FileHandler.getInstance();
     private static JLabel file;
 
-    public TopbarPanel(JTextArea textArea) {
+    public TopbarPanel(JTextArea textArea, TerminalArea Terminal) {
         // layout
         setLayout(new BorderLayout());
         setBackground(Colors.GREEN);
@@ -39,11 +39,11 @@ public class TopbarPanel extends JPanel implements FileChangeListener {
         buttons.setBackground(Colors.GREEN);
 
         /** <-------  COMPILE  -------> **/
-        CompileButton compile = new CompileButton(textArea);
+        CompileButton compile = new CompileButton(textArea, Terminal);
         buttons.add(compile);
 
         /** <-------  RUN  -------> **/
-        RunButton run = new RunButton(textArea);
+        RunButton run = new RunButton(textArea, Terminal);
         buttons.add(run);
 
         add(buttons, BorderLayout.EAST);
