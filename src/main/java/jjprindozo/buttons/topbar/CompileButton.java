@@ -54,7 +54,7 @@ public class CompileButton extends TopbarButtonTheme {
   }
 
   private static void CompileLanguage() {
-    String parserPath = "C:/Users/princ/Desktop/adunami_language";
+    String parserPath = GlobalVar.LANGUAGE_PATH;
     try {
       // Compile command
       String compileCommand = "g++ -o parser.exe parser.cpp";
