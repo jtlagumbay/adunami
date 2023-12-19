@@ -4,8 +4,13 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.undo.UndoManager;
 
@@ -24,6 +29,19 @@ public class TextEditorTextArea extends JTextArea {
 
         // Set the caret color to white
         setCaretColor(Colors.WHITE);
+
+        // set TAB key to two spaces only
+        KeyStroke tabKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0);
+        getInputMap().put(tabKeyStroke, "insertTwoSpaces");
+
+        Action insertTwoSpacesAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                replaceSelection("  ");
+            }
+        };
+
+        getActionMap().put("insertTwoSpaces", insertTwoSpacesAction);
 
         updateLineNumbers();
     }

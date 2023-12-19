@@ -14,7 +14,7 @@ public class Terminal {
   public static void main(String[] args) throws Exception {
     // Where we want to execute
     String currentPath = System.getProperty("user.dir");
-    File location = new File(currentPath);
+    // File location = new File(currentPath);
     File loc = new File("src\\main\\java\\jjprindozo\\terminal");
     // System.out.println(loc);
 

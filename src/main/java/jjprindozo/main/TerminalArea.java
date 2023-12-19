@@ -5,9 +5,15 @@ import javax.swing.*;
 import jjprindozo.common.Colors;
 
 import java.awt.*;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 public class TerminalArea extends JTextArea {
     public TerminalArea() {
+        initialize();
+    }
+
+    private void initialize() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         setPreferredSize(new Dimension((int) (screenSize.getWidth()/4), HEIGHT));
@@ -16,6 +22,18 @@ public class TerminalArea extends JTextArea {
         setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
         setEditable(true);  // Allow user input
         setMargin(new Insets(0, 40, 0, 0));
+
+        // Create a custom OutputStream to redirect System.out
+        OutputStream outputStream = new OutputStream() {
+            @Override
+            public void write(int b) {
+                // Append the output to the JTextArea
+                append(String.valueOf((char) b));
+            }
+        };
+        
+        // Set the custom OutputStream as the new System.out
+        System.setOut(new PrintStream(outputStream, true));
 
         updateLineNumbers();
     }

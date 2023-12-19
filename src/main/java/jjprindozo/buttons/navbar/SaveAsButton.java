@@ -78,9 +78,9 @@ public class SaveAsButton extends NavbarButtonTheme {
       String fileName = selectedFile.getAbsolutePath();
       JFrame frame = new JFrame();
 
-      // add .txt extension
-      if (!fileName.toLowerCase().endsWith(".txt")) {
-        fileName += ".txt";
+      // add .adm extension
+      if (!fileName.toLowerCase().endsWith(".adm")) {
+        fileName += ".adm";
       }
 
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
