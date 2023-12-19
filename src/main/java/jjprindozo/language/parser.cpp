@@ -259,7 +259,7 @@ void Parser::expectInstruction(){
 
 
         } else if (m_symbol.type == ARITHMETIC_EXPRESSION){
-          symbol_table.printSymbols();
+          // symbol_table.printSymbols();
           int result = calculate(m_symbol.value);
           printInt(token, to_string(result));
         } else {
@@ -399,7 +399,7 @@ void Parser::expectStatement(string m_var_name){
   switch (m_token.type){
     case VAR_NAME:
       {
-        cout << *curr_token << endl;
+        // cout << *curr_token << endl;
         Symbol m_var_symbol = symbol_table.getSymbol((*curr_token).lexeme, *curr_token);
         int var_value = calculate(m_var_symbol.value);
         m_lexeme = to_string(var_value);
