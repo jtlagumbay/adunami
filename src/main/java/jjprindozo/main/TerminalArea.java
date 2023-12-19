@@ -14,9 +14,6 @@ public class TerminalArea extends JTextArea {
     }
 
     private void initialize() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        setPreferredSize(new Dimension((int) (screenSize.getWidth()/4), HEIGHT));
         setBackground(Colors.BLACK);
         setForeground(Colors.WHITE);
         setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
