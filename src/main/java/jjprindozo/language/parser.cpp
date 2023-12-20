@@ -13,30 +13,30 @@ using namespace std;
 class Parser{
   /****** TOKENS AND ITERATOR ********/
   vector<vector<TokenInfo>> tokens;                 // Tokens per line
-  vector<vector<TokenInfo>>::iterator curr_line;   // Current line
-  vector<vector<TokenInfo>>::iterator end_line;   // End of the line
-  vector<TokenInfo>::iterator curr_token;   // Start of token per line
-  vector<TokenInfo>::iterator end_token;   // End of token per line
+  vector<vector<TokenInfo>>::iterator curr_line;    // Current line
+  vector<vector<TokenInfo>>::iterator end_line;     // End of the line
+  vector<TokenInfo>::iterator curr_token;           // Start of token per line
+  vector<TokenInfo>::iterator end_token;            // End of token per line
 
   /****** TOKENS MOVEMENT HELPER ********/
-  void moveNext();                              // Move to next token
-  void moveNextLine();                              // Move to next line
-  TokenInfo peekNext();
-  bool isEnd();
-  bool isEndLine();
+  void moveNext();                          // Move to next token
+  void moveNextLine();                      // Move to next line
+  TokenInfo peekNext();                     // Peek at the next token
+  bool isEnd();                             // Check if at the end of tokens
+  bool isEndLine();                         // Check if at the end of the line
 
   /****** PARSING TOKENS ********/
-  void expect(Token);
-  void expectStatement(string);
-  void expectInstruction();
-  void expectAssign(string);
-  void parseInstruction(vector<TokenInfo>::iterator);
+  void expect(Token);                       // Expect a specific token type
+  void expectStatement(string);             // Expect a statement
+  void expectInstruction();                 // Expect an instruction
+  void expectAssign(string);                // Expect an assignment
+  void parseInstruction(vector<TokenInfo>::iterator);       // Parse an instruction
 
   /****** ASM FILE WRITING ******/
   string adm_file_name; // adm_file
   string asm_file_name;
   ofstream asm_file_writer;
-  void initAsmFile();
+  void initAsmFile();   // Initialize the ASM file
   void appendData(AsmDataType, string, string);
   void appendLoadWord(AsmRegisters, string);
   void appendLoadAddress(AsmRegisters, string);
@@ -59,9 +59,9 @@ class Parser{
 public:
   Parser(vector<vector<TokenInfo>>&, string);
   ~Parser();
-  void start();
-  void generateAsm();
-  void printSymbolTable();
+  void start();                               // Start parsing
+  void generateAsm();                         // Generate ASM code
+  void printSymbolTable();                    // Print the symbol table
 };
 
 int main() {
@@ -120,7 +120,7 @@ Parser::~Parser(){
 }
 
 void Parser::printSymbolTable(){
-
+  // Print the symbol table
   symbol_table.printSymbols();
 }
 
@@ -158,7 +158,7 @@ void Parser::moveNext(){
 
 void Parser::start(){
 
-
+  // Check if the program begins with the correct token
   if((*curr_line++)[0].type==PROG_BEGIN){
     expect(PROG_BEGIN);
   } else {
@@ -178,6 +178,8 @@ void Parser::start(){
       "User error or Naputol ang file pag save."
     );
   }
+
+  // Loop through lines and parse instructions
   while(curr_line!=end_line && (*curr_line)[0].type!=END){
     if((*curr_line)[0].depth<1){
       throw Error(
@@ -191,6 +193,7 @@ void Parser::start(){
     moveNextLine();
   }
 
+  // Check for instructions after 'hmn'
   if(curr_line!=end_line){
     throw Error(
       SYNTAX,
@@ -200,6 +203,7 @@ void Parser::start(){
     );
   }
 
+  // Check if the program ends with the correct token
   expect(END);
  
 
@@ -207,7 +211,9 @@ void Parser::start(){
 }
 
 void Parser::expectInstruction(){
+  // Expect an instruction
 
+  // Skip if at the end of line
   if(isEndLine()){
     return;
   }
@@ -228,11 +234,13 @@ void Parser::expectInstruction(){
         Symbol m_symbol = symbol_table.getSymbol(m_var_name);
         expect(VAR_NAME);
 
+        // Print integer or string based on symbol type
         if(m_symbol.type == INTEGER){
           printInt(token, m_symbol.value);
         } else if(m_symbol.type == STRING){
           printStr(token, m_symbol.value);
         } else if(m_symbol.type == USER_INPUT){
+          // Handle user input
           string temp_key = m_symbol.var_name + to_string(token.line_number) + to_string(token.token_number);
 
           appendLoadAddress(A0, m_symbol.var_name);
@@ -242,7 +250,7 @@ void Parser::expectInstruction(){
           appendLoadImmediate(V0, 4);
           appendSyscall();
         } else if (m_symbol.type == VAR_NAME){
-
+          // Handle output of variable name
           Symbol m_var_symbol = symbol_table.getSymbol(m_symbol.value);
 
           if(m_var_symbol.type==ARITHMETIC_EXPRESSION){
@@ -259,6 +267,7 @@ void Parser::expectInstruction(){
 
 
         } else if (m_symbol.type == ARITHMETIC_EXPRESSION){
+          // Handle arithmetic expression result
           // symbol_table.printSymbols();
           int result = calculate(m_symbol.value);
           printInt(token, to_string(result));
@@ -266,6 +275,7 @@ void Parser::expectInstruction(){
           throw Error(SEMANTIC, "Variable can only be of type integer or string", "parser.cpp > void Parser::expectInstruction(){ >  case OUTPUT: > if((*curr_token).type==VAR_NAME){ > else", "Most probably uncaught na case.");
         }
       } else if((*curr_token).type==STRING){
+        // Handle output of string
         TokenInfo string_token = *curr_token;
 
         expect(STRING);
@@ -273,6 +283,7 @@ void Parser::expectInstruction(){
         printStr(string_token, string_token.lexeme);
 
       } else if((*curr_token).type==INTEGER){
+        // Handle output of integer
         TokenInfo int_token = *curr_token;
 
         expect(INTEGER);
@@ -292,16 +303,19 @@ void Parser::expectInstruction(){
       }
       break;
     case INPUT:
+      // Handle input instruction
       expect(INPUT);
       expect(IN_OUT_OPERATOR);
       {
         string m_var_name = (*curr_token).lexeme;
         expect(VAR_NAME);
         
+        // Allocate register for user input
         AsmRegisters m_reg = symbol_table.giveUnusedRegister();
 
         symbol_table.editSymbol(USER_INPUT, m_var_name,"", m_reg);
 
+        // Allocate register for user input
         appendData(SPACE, m_var_name, "128");
         appendLoadAddress(A0, m_var_name);
 
@@ -328,6 +342,7 @@ void Parser::expectInstruction(){
         string m_var_name = (*curr_token).lexeme;
         expect(VAR_NAME);
         symbol_table.addSymbol(UNKNOWN, m_var_name);
+        // Check if assignment follows the declaration
         if(!isEnd() and (*curr_token).type == ASSIGN_OPERATOR){
           expectAssign(m_var_name);
         }
@@ -364,6 +379,8 @@ void Parser::expectAssign(string m_var_name){
       "parser.cpp > Parser::expectInstruction() > expectAssign",
       "Either wala na tarong separate ang tokens, or wala na tarong identify ang tokens.");
   }
+
+  // Expect statement after assignment
   expectStatement(m_var_name);
       
 }
@@ -373,6 +390,7 @@ void Parser::expect(Token expected_token){
     return;
   }
 
+  // Check if the current token matches the expected token
   if((*curr_token).type!=expected_token){
     string expected_token_string = tokenToString(expected_token);
     string error_msg = "Expected " + expected_token_string + " at line " + to_string((*curr_token).line_number)+":"+to_string((*--curr_token).token_number+1)+".";
@@ -389,21 +407,24 @@ void Parser::expect(Token expected_token){
 
 void Parser::expectStatement(string m_var_name){
 
+  // Get the current token
   TokenInfo m_token = *curr_token;
-
+  // Retrieve symbol information for the current variable name
   Symbol m_symbol = symbol_table.getSymbol(m_var_name, *curr_token);
-
+  // Initialize lexeme and symbol_value strings
   string m_lexeme = (*curr_token).lexeme;
   string m_symbol_value;
-
+  // Check the type of the current token
   switch (m_token.type){
     case VAR_NAME:
       {
         // cout << *curr_token << endl;
+        // If the token type is VAR_NAME, get the symbol and calculate its value
         Symbol m_var_symbol = symbol_table.getSymbol((*curr_token).lexeme, *curr_token);
         int var_value = calculate(m_var_symbol.value);
         m_lexeme = to_string(var_value);
 
+        // Consume and expect the VAR_NAME token
         expect(VAR_NAME);
       }
       break;
@@ -420,7 +441,7 @@ void Parser::expectStatement(string m_var_name){
       expect(DOUBLE);
       break;
     default:
-      throw Error(
+      throw Error(      // Throw an error if an unexpected token type is encountered
         SYNTAX,
         "Expecting a variable or value on line "+to_string((*curr_token).line_number)+":"+to_string((*--curr_token).token_number+1),
         "parser.cpp > Parser::expectStatement()",
@@ -433,25 +454,32 @@ void Parser::expectStatement(string m_var_name){
     symbol_table.editSymbol(m_symbol.type, m_var_name, m_symbol.value+m_lexeme);
   }
 
+   // Check if the end of the input is reached
   if(isEnd()){
     return;
   }
 
+  // Check if the next token is an arithmetic operator
   if ((*curr_token).type==ARITHMETIC_OPERATOR){
+    // Get the operator lexeme and symbol information
     string m_operator = (*curr_token).lexeme;
     Symbol m_symbol = symbol_table.getSymbol(m_var_name, *curr_token);
 
+    // Consume and expect the ARITHMETIC_OPERATOR token
     expect(ARITHMETIC_OPERATOR);
 
+    // Update the symbol type to ARITHMETIC_EXPRESSION and concatenate the operator
     symbol_table.editSymbol(ARITHMETIC_EXPRESSION, m_var_name, m_symbol.value + m_operator);
 
-    if(isEnd()){
+    if(isEnd()){          // Check if the end of the input is reached after consuming the operator
       throw Error(
       SYNTAX,
       "Expecting a variable or value on line "+to_string((*curr_token).line_number)+":"+to_string((*--curr_token).token_number+1),
       "parser.cpp > Parser::expectStatement() >  if ((*curr_token).type==ARITHMETIC_OPERATOR)",
       "Either wala na tarong separate ang tokens, or wala na tarong identify ang tokens.");
     }
+
+    // Recursively call expectStatement to handle the next part of the expression
     expectStatement(m_var_name);
   }
 
@@ -459,22 +487,27 @@ void Parser::expectStatement(string m_var_name){
 }
 
 bool Parser::isEnd(){
+  // Check if the current token has reached the end token
   return curr_token == end_token;
 }
 bool Parser::isEndLine(){
+  // Check if the current line has reached the end line
   return curr_line == end_line;
 }
 
 void Parser::generateAsm(){
+  // Generate the assembly code for program termination
   asm_file_writer
       << "\tli   $v0, 10  \n"
       << "\tsyscall \n\n\n\n"
       << "adm_check_type:\n\tlbu $s1, 0($a2)\n\tbeq $s1, 10, adm_is_int\n\tblt $s1, 48, adm_is_string\n\tbgt $s1, 57, adm_is_string\n\taddi $a2, $a2, 1\n\tj adm_check_type\n\nadm_is_int:\n\tli $v0, 0\n\tjr $ra\n\nadm_is_string:\n\tli $v0, 1\n\tjr $ra\n\nadm_remove_last_new_line:\n\tlbu $s1, 0($a0)\n\tbeq $s1, 10, exit_adm_remove_last_new_line\n\taddi $a0, $a0, 1\n\tj adm_remove_last_new_line\n\nexit_adm_remove_last_new_line:\n\tli $t0, 0\n\tsb $t0, 0($a0)\n\tjr $ra\n\n";
 
+  // Close the assembly file
   asm_file_writer.close();
 }
 
 void Parser::appendData(AsmDataType data_type, string data_name, string data_value){
+  // Append data section to the assembly file
   string to_append="\t";
 
   to_append += 
@@ -484,10 +517,11 @@ void Parser::appendData(AsmDataType data_type, string data_name, string data_val
       + "\t"
       + data_value;
 
+  // Close the assembly file
   asm_file_writer.close();
-
+  // Open the temporary file for reading
   ifstream temp_file_reader(asm_file_name);
-
+  // Check if the temporary file is successfully opened
   if (!temp_file_reader.is_open()) {
     throw Error(
       ASM_GENERATION,
@@ -496,6 +530,7 @@ void Parser::appendData(AsmDataType data_type, string data_name, string data_val
       "error sa pagcreate og temporary input file");
   }
 
+  // Read the lines from the temporary file and update the data section
   vector<std::string> temp_lines;
   string temp_curr_line;
 
@@ -506,45 +541,69 @@ void Parser::appendData(AsmDataType data_type, string data_name, string data_val
     }
   }
 
-  temp_file_reader.close();
+  temp_file_reader.close();         // Close the temporary file
+  // Open the assembly file in truncation mode
   asm_file_writer.open(asm_file_name, ios::trunc);
+
+  // Write the updated lines to the assembly file
   for (const auto& updatedLine : temp_lines) {
       asm_file_writer << updatedLine << endl;
   }
 }
 
 void Parser::appendLoadWord(AsmRegisters reg, string label){
+  // Append load word instruction to the assembly file
   asm_file_writer<<"\tlw "<<asmRegToString(reg)<<", "<<label<<endl;
 }
 
 void Parser::appendLoadAddress(AsmRegisters reg, string label){
+  // Append load address instruction to the assembly file
   asm_file_writer<<"\tla "<<asmRegToString(reg)<<", "<<label<<endl;
 }
 
 void Parser::appendLoadImmediate(AsmRegisters reg, int value){
+  // Append load immediate instruction to the assembly file
   asm_file_writer<<"\tli "<<asmRegToString(reg)<<", "<<value<<endl;
 
 }
 
 void Parser::appendSyscall(){
+  // Append syscall instruction to the assembly file
   asm_file_writer<<"\tsyscall "<<endl<<endl;
 
 }
 
 void Parser::printInt(TokenInfo token, string val) {
+  // Create a unique label for the integer value
   string int_label = "print_" + to_string(token.line_number) + "_" + to_string(token.token_number);
+  
+  // Append data section for the integer value
   appendData(WORD, int_label, val);
+
+  // Load the integer value into register A0
   appendLoadWord(A0, int_label);
+  
+  // Load the syscall code for printing an integer into register V0
   appendLoadImmediate(V0, 1);
+
+  // Execute the syscall for printing an integer
   appendSyscall();
 }
 
 void Parser::printStr(TokenInfo token, string val) {
+  // Create a unique label for the string value
   string to_print_label = "print_" + to_string(token.line_number) + "_" + to_string(token.token_number);
 
+  // Append data section for the string value
   appendData(ASCIIZ, to_print_label, val);
+
+  // Load the address of the string value into register A0
   appendLoadAddress(A0, to_print_label);
+
+  // Load the syscall code for printing a string into register V0
   appendLoadImmediate(V0, 4);
+
+  // Execute the syscall for printing a string
   appendSyscall();
 }
 
