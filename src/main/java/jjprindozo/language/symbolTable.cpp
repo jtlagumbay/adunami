@@ -6,7 +6,6 @@
 #include "tokenEnum.hpp"
 #include "asmInstructions.cpp"
 #include "errorHandler.hpp"
-#include "scanner.cpp"
 
 using namespace std;
 
