@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <queue>
 #include <stack>
 
@@ -179,7 +180,7 @@ int solveQ() {
 */
 string removeSpaces(string expr) {
     // using erase function to remove any spaces in the string
-    expr.erase(std::remove_if(expr.begin(), expr.end(), ::isspace), expr.end());
+    expr.erase(remove_if(expr.begin(), expr.end(), ::isspace), expr.end());
 
     // return the new expression
     return expr;
