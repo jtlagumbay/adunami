@@ -1,37 +1,40 @@
-#pragma once
+#pragma once    // Ensures this header is included only once during compilation to avoid redefinition issues
 
+// Enum definition for various tokens that represent different elements in the programming language
 enum Token {
-    PROG_BEGIN,   
-    DECLARE, 
-    VAR_NAME, 
-    ASSIGN,
-    INPUT,
-    OUTPUT,
-    IF,
-    IF_STATEMENT,
-    LOGICAL_EXPRESSION,
-    ARITHMETIC_EXPRESSION,
-    ELSE,
-    ELSE_STATEMENT,
-    ENDL,
-    INTEGER,
-    DOUBLE,
-    STRING,
-    CHARACTER,
-    COMMENT,
-    UNKNOWN,
-    END,
-    PUNCTUATION,
-    IN_OUT_OPERATOR,
-    ASSIGN_OPERATOR,
-    ARITHMETIC_OPERATOR,
-    USER_ARITHMETIC_EXPRESSION,
-    LOGICAL_OPERATOR,
-    USER_INPUT, // Unknown type na variable kay depende sa user
+    PROG_BEGIN,                     // beginning of program
+    DECLARE,                        // declaration keyword
+    VAR_NAME,                       // variable name
+    ASSIGN,                         // assignment operation
+    INPUT,                          // input operation
+    OUTPUT,                         // output operation
+    IF,                             // if keyword
+    IF_STATEMENT,                   // if statement
+    LOGICAL_EXPRESSION,             // logical expression
+    ARITHMETIC_EXPRESSION,          // arithmetic expression
+    ELSE,                           // else keyword
+    ELSE_STATEMENT,                 // else statemtent
+    ENDL,                           // end of line
+    INTEGER,                        // integer type
+    DOUBLE,                         // double type
+    STRING,                         // string type
+    CHARACTER,                      // character type
+    COMMENT,                        // comment
+    UNKNOWN,                        // unknown token
+    END,                            // end of program
+    PUNCTUATION,                    // punctuation symbol
+    IN_OUT_OPERATOR,                // input/output operator
+    ASSIGN_OPERATOR,                // assignment operator
+    ARITHMETIC_OPERATOR,            // arithmetic operator
+    USER_ARITHMETIC_EXPRESSION,     // user-defined arithmetic expression
+    LOGICAL_OPERATOR,               // logical operator
+    USER_INPUT,                     // Unknown type na variable kay depende sa user
 };
 
+// Function to convert a token enum value to its corresponding string representation
 const char* tokenToString(Token t) {
     switch (t) {
+        // map each token enum value to its respective string representation
         case PROG_BEGIN: return "PROG_BEGIN";
         case DECLARE: return "DECLARE";
         case VAR_NAME: return "VAR_NAME";
@@ -59,6 +62,6 @@ const char* tokenToString(Token t) {
         case ARITHMETIC_OPERATOR: return "ARITHMETIC_OPERATOR";
         case LOGICAL_OPERATOR: return "LOGICAL_OPERATOR";
         case USER_INPUT: return "USER_INPUT";
-        default: return "tokenToString Error";
+        default: return "tokenToString Error";               // default case for handling unknown tokens
     }
 } 
