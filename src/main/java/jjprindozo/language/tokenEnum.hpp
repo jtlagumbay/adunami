@@ -32,12 +32,6 @@ enum Token {
 };
 
 // Function to convert a token enum value to its corresponding string representation
-/**
- * TOKEN: changes the token to string datatype
- * 
- * PARAMETER: Token
- * RETURN: string version of the token
-*/
 const char* tokenToString(Token t) {
     switch (t) {
         // map each token enum value to its respective string representation
