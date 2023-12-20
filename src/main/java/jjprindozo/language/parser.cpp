@@ -385,12 +385,20 @@ void Parser::expectAssign(string m_var_name){
       
 }
 
+/**
+ * PARSER: expects the token appropriate for the syntax
+ * 
+ * PARAMETER: expected token
+ * RETURN: none
+*/
 void Parser::expect(Token expected_token){
+  // end function if it is the end of the program
   if(isEnd()){
     return;
   }
 
   // Check if the current token matches the expected token
+  // if not, throw error
   if((*curr_token).type!=expected_token){
     string expected_token_string = tokenToString(expected_token);
     string error_msg = "Expected " + expected_token_string + " at line " + to_string((*curr_token).line_number)+":"+to_string((*--curr_token).token_number+1)+".";
@@ -402,11 +410,18 @@ void Parser::expect(Token expected_token){
       );
   }
 
+  // move to the next token 
   moveNext();
 }
 
+/**
+ * PARSER: expects the appropriate statement for the expression
+ * 
+ * PARAMETER: string variable
+ * RETURN: none
+ * 
+*/
 void Parser::expectStatement(string m_var_name){
-
   // Get the current token
   TokenInfo m_token = *curr_token;
   // Retrieve symbol information for the current variable name
@@ -414,11 +429,11 @@ void Parser::expectStatement(string m_var_name){
   // Initialize lexeme and symbol_value strings
   string m_lexeme = (*curr_token).lexeme;
   string m_symbol_value;
+
   // Check the type of the current token
   switch (m_token.type){
     case VAR_NAME:
       {
-        // cout << *curr_token << endl;
         // If the token type is VAR_NAME, get the symbol and calculate its value
         Symbol m_var_symbol = symbol_table.getSymbol((*curr_token).lexeme, *curr_token);
         int var_value = calculate(m_var_symbol.value);
@@ -428,16 +443,17 @@ void Parser::expectStatement(string m_var_name){
         expect(VAR_NAME);
       }
       break;
-    case STRING:
+
+    case STRING: // expect a STRING token if type is STRING
       expect(STRING);
       break;
-    case CHARACTER:
+    case CHARACTER: // expect a CHARACTER token if type is CHARACTER
       expect(CHARACTER);
       break;
-    case INTEGER:
+    case INTEGER: // expect an INTEGER token if token type is INTEGER
       expect(INTEGER);
       break;
-    case DOUBLE:
+    case DOUBLE: // expect a DOUBLE token if token type is DOUBLE
       expect(DOUBLE);
       break;
     default:
@@ -449,9 +465,9 @@ void Parser::expectStatement(string m_var_name){
   }
 
   if(m_symbol.type == UNKNOWN){ // meaning mao pay pag declare sa variable so ang data type sa variable kay ang data type sa sunod na tokem
-    symbol_table.editSymbol(m_token.type, m_var_name, m_symbol.value+m_lexeme);
+    symbol_table.editSymbol(m_token.type, m_var_name, m_symbol.value+m_lexeme); // edit the symbol and pass the new token type
   } else {
-    symbol_table.editSymbol(m_symbol.type, m_var_name, m_symbol.value+m_lexeme);
+    symbol_table.editSymbol(m_symbol.type, m_var_name, m_symbol.value+m_lexeme); // edit the symbol but pass the current token type
   }
 
    // Check if the end of the input is reached
@@ -482,19 +498,36 @@ void Parser::expectStatement(string m_var_name){
     // Recursively call expectStatement to handle the next part of the expression
     expectStatement(m_var_name);
   }
-
-  
 }
 
+/**
+ * PARSER: checks if the current token parsed is the end token
+ * 
+ * PARAMETER: none
+ * RETURN: boolean expressionn if current token is the end token
+*/
 bool Parser::isEnd(){
   // Check if the current token has reached the end token
   return curr_token == end_token;
 }
+
+/**
+ * PARSER: helper function that checks if the current line parsed is the end line
+ * 
+ * PARAMETER: none
+ * RETURN: boolean expression if it is the end line
+*/
 bool Parser::isEndLine(){
   // Check if the current line has reached the end line
   return curr_line == end_line;
 }
 
+/**
+ * PARSER: helper function that generates the starter code for assembly program
+ * 
+ * PARAMETER: none
+ * RETURN: none
+*/
 void Parser::generateAsm(){
   // Generate the assembly code for program termination
   asm_file_writer
@@ -506,11 +539,18 @@ void Parser::generateAsm(){
   asm_file_writer.close();
 }
 
+/**
+ * PARSER: helper function that appends data to the assembly program
+ * 
+ * PARAMETER: datatype, the name, and the value
+ * RETURN: none
+ * 
+*/
 void Parser::appendData(AsmDataType data_type, string data_name, string data_value){
   // Append data section to the assembly file
   string to_append="\t";
 
-  to_append += 
+  to_append += // store the data to be appended in a string
       data_name 
       + ":\t" 
       + asmDataToString(data_type) 
@@ -519,9 +559,12 @@ void Parser::appendData(AsmDataType data_type, string data_name, string data_val
 
   // Close the assembly file
   asm_file_writer.close();
+
   // Open the temporary file for reading
   ifstream temp_file_reader(asm_file_name);
+
   // Check if the temporary file is successfully opened
+  // throw error if file is not opened
   if (!temp_file_reader.is_open()) {
     throw Error(
       ASM_GENERATION,
@@ -534,14 +577,16 @@ void Parser::appendData(AsmDataType data_type, string data_name, string data_val
   vector<std::string> temp_lines;
   string temp_curr_line;
 
+  // traverse through the file and find the .data section
   while (getline(temp_file_reader, temp_curr_line)) {
     temp_lines.push_back(temp_curr_line);
     if(temp_curr_line==".data"){
-      temp_lines.push_back(to_append);
+      temp_lines.push_back(to_append); // once found, push the data to append
     }
   }
 
   temp_file_reader.close();         // Close the temporary file
+
   // Open the assembly file in truncation mode
   asm_file_writer.open(asm_file_name, ios::trunc);
 
@@ -551,28 +596,63 @@ void Parser::appendData(AsmDataType data_type, string data_name, string data_val
   }
 }
 
+/**
+ * PARSER: helper function that writes load word instruction in the assembly program
+ * 
+ * PARAMETER: register to use, label
+ * RETURN: none
+ * 
+*/
 void Parser::appendLoadWord(AsmRegisters reg, string label){
   // Append load word instruction to the assembly file
   asm_file_writer<<"\tlw "<<asmRegToString(reg)<<", "<<label<<endl;
 }
 
+/**
+ * PARSER: helper function that writes load address instruction to the assembly program
+ * 
+ * PARAMETER: register used, label
+ * RETURN: none
+ * 
+*/
 void Parser::appendLoadAddress(AsmRegisters reg, string label){
   // Append load address instruction to the assembly file
   asm_file_writer<<"\tla "<<asmRegToString(reg)<<", "<<label<<endl;
 }
 
+/**
+ * PARSER: helper function that writes load immediate instruction to assembly program
+ * 
+ * PARAMETER: register used, label
+ * RETURN: none
+ * 
+*/
 void Parser::appendLoadImmediate(AsmRegisters reg, int value){
   // Append load immediate instruction to the assembly file
   asm_file_writer<<"\tli "<<asmRegToString(reg)<<", "<<value<<endl;
 
 }
 
+/**
+ * PARSER: helper function that writes syscall instruction in the assembly program
+ * 
+ * PARAMETER: none
+ * RETURN: none
+ * 
+*/
 void Parser::appendSyscall(){
   // Append syscall instruction to the assembly file
   asm_file_writer<<"\tsyscall "<<endl<<endl;
 
 }
 
+/**
+ * PARSER: helper function that writes the print insttructions for integer in the assembly program
+ * 
+ * PARAMETER: token information and value
+ * RETURN: none
+ * 
+*/
 void Parser::printInt(TokenInfo token, string val) {
   // Create a unique label for the integer value
   string int_label = "print_" + to_string(token.line_number) + "_" + to_string(token.token_number);
@@ -590,6 +670,13 @@ void Parser::printInt(TokenInfo token, string val) {
   appendSyscall();
 }
 
+/**
+ * PARSER: helper function that writes the print instructions for string datatype in the assembly program
+ * 
+ * PARAMETER: token information and value
+ * RETURN: none
+ * 
+*/
 void Parser::printStr(TokenInfo token, string val) {
   // Create a unique label for the string value
   string to_print_label = "print_" + to_string(token.line_number) + "_" + to_string(token.token_number);
@@ -607,31 +694,92 @@ void Parser::printStr(TokenInfo token, string val) {
   appendSyscall();
 }
 
+/**
+ * PARSER: helper function that writes move instruction in the assembly program
+ * 
+ * PARAMETER: destination register and the source register
+ * RETURN: none
+ * 
+*/
 void Parser::appendMove(AsmRegisters dest, AsmRegisters src){
   asm_file_writer << "\tmove " << asmRegToString(dest) << ", " << asmRegToString(src) << endl;
 }
 
+/**
+ * PARSER: helper function that writes add instruction in the assembly program
+ * 
+ * PARAMETER: destination register and the 2 source registers
+ * RETURN: none
+ * 
+*/
 void Parser::appendAdd(AsmRegisters dest, AsmRegisters src1, AsmRegisters src2){
   asm_file_writer << "\tadd " << asmRegToString(dest) << ", " << asmRegToString(src1) << ", " << asmRegToString(src2) << endl;
 }
+
+/**
+ * PARSER: helper function that writes addi instruction (value and a register addition) in the assembly program
+ * 
+ * PARAMETER: destination register, the source register, and the immediate value
+ * RETURN: none
+ * 
+*/
 void Parser::appendAddI(AsmRegisters dest, AsmRegisters src, int immediate){
   asm_file_writer << "\taddi " << asmRegToString(dest) << ", " << asmRegToString(src) << ", " << to_string(immediate) << endl;
 }
+
+/**
+ * PARSER: helper function that writes jal instruction in the assembly program
+ * 
+ * PARAMETER: branch name
+ * RETURN: none
+ * 
+*/
 void Parser::appendJal(string branch){
   asm_file_writer << "\tjal " + branch <<endl<< endl;
 }
 
+/**
+ * PARSER: helper function that writes branch equal instruction in the assembly program
+ * 
+ * PARAMETER: source register, immediate value, and the branch name
+ * RETURN: none
+ * 
+*/
 void Parser::appendBeq(AsmRegisters src, int immediate, string branch){
   asm_file_writer<<"\tbeq "<<asmRegToString(src)<<", "<<to_string(immediate)<<", "<<branch<<endl;
 
 }
+
+/**
+ * PARSER: helper function that writes branch not equal instruction to the assembly program
+ * 
+ * PARAMETER: source register, immediate value, and branch name to go to
+ * RETURN: none
+ * 
+*/
 void Parser::appendBne(AsmRegisters src, int immediate, string branch){
   asm_file_writer<<"\tbnq "<<asmRegToString(src)<<", "<<to_string(immediate)<<", "<<branch<<endl;
 
 }
+
+/**
+ * PARSER: helper function that writes branch name to the assembly program
+ * 
+ * PARAMETER: branch name
+ * RETURN: none
+ * 
+*/
 void Parser::appendBranchName(string branch){
   asm_file_writer <<"\n"<< branch << ":" << endl;
 }
+
+/**
+ * PARSER: helper function that writes jump instruction to the assembly program
+ * 
+ * PARAMETER: branch name to go to
+ * RETURN: none
+ * 
+*/
 void Parser::appendJump(string branch){
   asm_file_writer << "\tj "<< branch << endl;
 }
