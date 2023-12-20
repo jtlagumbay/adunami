@@ -6,7 +6,7 @@
 /**
  * SIMPLE CALCULATOR
  * 
- * This calculator uses the Shunt Yard Algorithm to find the answer to the expression.
+ * This calculator uses the Shunting Yard Algorithm to find the answer to the expression.
  * The general structure of this algorithm is that it changes the common infix expression
  * to a postfix expression. After that, the algorithm uses a queue and a stack to calculate the
  * answer.
